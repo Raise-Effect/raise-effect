@@ -1,0 +1,23 @@
+svg {
+  display: block;
+}
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.chart {
+  margin: 10px 0 10px 0;
+}
+
+.svg-container {
+  border: 1px solid black;
+  margin: 5px 0 0 0;
+  width: 421px;
+}

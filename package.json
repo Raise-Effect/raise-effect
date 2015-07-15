@@ -1,0 +1,33 @@
+{
+  "name": "test",
+  "title": "test",
+  "description": "Test repo for exploring data flow",
+  "version": "0.0.1",
+  "main": "./client/index.js",
+  "homepage": "http://www.hackoregon.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jobs-Economy/test.git"
+  },
+  "dependencies": {
+    "d3": "^3.5.6",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.0",
+    "moment": "^2.10.3"
+  },
+  "devDependencies": {
+    "backbone": "^1.2.1",
+    "browserify": "^10.2.6",
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "watchify": "^3.2.3"
+  },
+  "scripts": {},
+  "browserify": {},
+  "directories": {},
+  "author": {
+    "name": "Team Minimum Wage-Hack Oregon",
+    "url": "http://www.hackoregon.org/"
+  },
+  "license": ""
+}

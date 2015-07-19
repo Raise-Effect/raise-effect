@@ -16,14 +16,13 @@
   <div id="map" class="leaflet-container leaflet-retina leaflet-fade-anim"></div>
 
   <script type="text/javascript">
-    var mapboxAccessToken = "sk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6Ikp1RUZ3WE0ifQ.FAKwIQR3u4XdsndrCcAGEA";
+    var mapboxAccessToken = "pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA";
     var map = L.map('map', { zoomControl:false }).setView([44.121, -120.587], 7);
 
     map.dragging.disable();
     map.touchZoom.disable();
     map.doubleClickZoom.disable();
     map.scrollWheelZoom.disable();
-
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
         id: 'mapbox.light'

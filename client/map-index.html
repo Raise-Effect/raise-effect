@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <title>Jobs Economy</title>
+    <script type="text/javascript" src="./fixtures/countiesGeoJSON.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+  </head>
+  <body>
+
+  <div id="map" class="leaflet-container leaflet-retina leaflet-fade-anim"></div>
+
+  <script type="text/javascript">
+    var mapboxAccessToken = "sk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6Ikp1RUZ3WE0ifQ.FAKwIQR3u4XdsndrCcAGEA";
+    var map = L.map('map').setView([37.8, -96], 4);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
+        id: 'mapbox.light'
+      }).addTo(map);
+
+    L.geoJson(counties).addTo(map);
+  </script>
+
+  </body>
+</html>

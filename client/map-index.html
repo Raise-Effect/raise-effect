@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF8">
     <title>Jobs Economy</title>
     <script type="text/javascript" src="./fixtures/countiesGeoJSON.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,8 @@
 
   <script type="text/javascript">
     var mapboxAccessToken = "pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA";
-    var map = L.map('map', { zoomControl:false }).setView([44.121, -120.587], 7);
+    var map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7);
+		// set initial view to Oregon
 
     map.dragging.disable();
     map.touchZoom.disable();
@@ -51,6 +52,7 @@
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
+				fillColor: getColor(),
       };
     }
 
@@ -89,6 +91,10 @@
         click: zoomToFeature
       });
     }
+		
+		function getColor() {
+			return '#2b8cbe' ;
+		}
 
     geojson = L.geoJson(counties, {
       style: style,

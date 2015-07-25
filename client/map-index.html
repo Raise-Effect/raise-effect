@@ -5,6 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF8">
     <title>Jobs Economy</title>
     <script type="text/javascript" src="./fixtures/countiesGeoJSON.js"></script>
+		<script type="text/javascript" src="./fixtures/countiesSampleJSON.js"></script>
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -38,9 +39,17 @@
     };
 
     info.update = function (props) {
-      this._div.innerHTML = '<h4>Oregon Counties</h4>' +  (props ?
+      var countyInfo = '<h4>Oregon Counties</h4>' +  (props ?
         '<b>' + props.name + '</b><br />GeoID: ' + props.geoid
         : 'Hover over a county');
+			if (props) {
+					var countyId = props.name.split(' County')[0];
+					var countyData = getCountyData(countyId);
+					this._div.innerHTML = countyInfo + countyData;
+			}
+			else {
+					this._div.innerHTML = countyInfo;
+			};
     };
 
     info.addTo(map);
@@ -75,6 +84,7 @@
     }
 
     var geojson;
+		var sampleCountiesJSON;
 
     function resetHighlight(e) {
       geojson.resetStyle(e.target);
@@ -100,11 +110,18 @@
 		function getHighlightColor() {
 			return '#08306b' ;
 		}
+		
+		function getCountyData(id) {
+			var m = sampleCountiesJSON[id]["median household income"];
+			return '<br />Median Household Income: ' + m;
+		}
 
     geojson = L.geoJson(counties, {
       style: style,
       onEachFeature: onEachFeature
     }).addTo(map);
+		
+		sampleCountiesJSON = sampleCountiesData;
   </script>
 
   </body>

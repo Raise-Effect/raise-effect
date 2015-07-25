@@ -26,7 +26,7 @@
     map.scrollWheelZoom.disable();
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
-        id: 'mapbox.light'
+        id: 'mapbox.pencil'
       }).addTo(map);
 
     var info = L.control();
@@ -61,9 +61,10 @@
 
       layer.setStyle({
         weight: 5,
-        color: '#666',
+        color: getHighlightColor(),
         dashArray: '',
-        fillOpacity: 0.7
+        fillOpacity: 0.7,
+				fillColor: getHighlightColor(),
       });
 
       if (!L.Browser.ie && !L.Browser.opera) {
@@ -93,7 +94,11 @@
     }
 		
 		function getColor() {
-			return '#2b8cbe' ;
+			return '#3182bd' ;
+		}
+		
+		function getHighlightColor() {
+			return '#08306b' ;
 		}
 
     geojson = L.geoJson(counties, {

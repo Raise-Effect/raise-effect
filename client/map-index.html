@@ -17,6 +17,7 @@
   <div id="map" class="leaflet-container leaflet-retina leaflet-fade-anim"></div>
 
   <script type="text/javascript">
+		var sampleCountiesJSON = sampleCountiesData;
     var mapboxAccessToken = "pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA";
     var map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7);
 		// set initial view to Oregon
@@ -43,8 +44,8 @@
         '<b>' + props.name + '</b><br />GeoID: ' + props.geoid
         : 'Hover over a county');
 			if (props) {
-					var countyId = props.name.split(' County')[0];
-					var countyData = getCountyData(countyId);
+					var id = countyId(props.name);
+					var countyData = formattedCountyData(id);
 					this._div.innerHTML = countyInfo + countyData;
 			}
 			else {
@@ -61,7 +62,7 @@
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7,
-				fillColor: getColor(),
+				fillColor: getColorBasedOn(feature),
       };
     }
 
@@ -84,7 +85,6 @@
     }
 
     var geojson;
-		var sampleCountiesJSON;
 
     function resetHighlight(e) {
       geojson.resetStyle(e.target);
@@ -104,24 +104,53 @@
     }
 		
 		function getColor() {
-			return '#3182bd' ;
+			return '#3182bd';
 		}
+		
 		
 		function getHighlightColor() {
-			return '#08306b' ;
+			return '#08306b';
 		}
 		
-		function getCountyData(id) {
+		function getColorBasedOn(feature) {
+			var id = countyId(feature.properties.name);
+			var medianIncome = 0;
+			if(sampleCountiesJSON.hasOwnProperty(id)){
+				var medianIncome = sampleCountiesJSON[id]["median household income"];
+			};
+			var medianIncome = sampleCountiesJSON[id]["median household income"]
+			if (medianIncome < 35000) {
+				return '#eff3ff';
+			} else if (medianIncome >= 35000 && medianIncome < 40000) {
+				return '#c6dbef';
+			} else if (medianIncome >= 40000 && medianIncome < 45000) {
+				return '#9ecae1';
+			} else if (medianIncome >= 45000 && medianIncome < 50000) {
+				return '#6baed6';
+			} else if (medianIncome >= 50000 && medianIncome < 55000) {
+				return '#3182bd';
+			} else if (medianIncome >= 60000) {
+				return '#08519c';
+			};
+		}
+		
+		function countyId(countyName) {
+			return countyName.split(' County')[0];
+		}
+		
+		function formattedCountyData(id) {
 			var m = sampleCountiesJSON[id]["median household income"];
-			return '<br />Median Household Income: ' + m;
+			var s = sampleCountiesJSON[id]["ss - adult"];
+			var a = sampleCountiesJSON[id]["assumed minimum wage"];
+			var p = sampleCountiesJSON[id]["percentss - adult"];
+			return '<br />Median Household Income: ' + m + '<br />Self Sufficiency Standard for 1 Adult: ' + s + '<br />Assumed Minimum Wage: ' + a + '<br />Percent Self Sufficient for 1 Adult: ' + p;
 		}
 
     geojson = L.geoJson(counties, {
       style: style,
       onEachFeature: onEachFeature
     }).addTo(map);
-		
-		sampleCountiesJSON = sampleCountiesData;
+
   </script>
 
   </body>

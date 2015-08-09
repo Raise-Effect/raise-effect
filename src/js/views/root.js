@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
-import rootTemplate from 'hbs!templates/root';
+import $ from 'jquery';
+import rootTemplate from '../templates/root.hbs';
 
 let RootView = Backbone.View.extend({
     name: 'root',
@@ -15,7 +16,7 @@ let RootView = Backbone.View.extend({
     },
 
     setView(view) {
-        this.$('#main-content').html(view.render().$el);
+        $('#main-content').html(view.render().el);
     }
 });
 

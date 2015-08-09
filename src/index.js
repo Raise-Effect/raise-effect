@@ -7,7 +7,7 @@ Backbone.$ = $;
 window._ = _;
 window.Backbone = Backbone;
 
-document.addEventListener('deviceready', function() {
+$(document).ready(function() {
     window.app = new App();
     window.app.start();
 });

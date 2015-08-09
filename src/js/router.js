@@ -1,16 +1,17 @@
 import Backbone from 'backbone';
-import BCRouter from 'backbone-route-control';
 
-let Router = BCRouter.extend({
+let Router = Backbone.Router.extend({
     routes: {
-        '*all': 'app#index'
+        '*all': 'index'
     },
 
-    initialize() {
-        Backbone.history.start({
-          pushState: window.history && window.history.pushState,
-          root: '/'
-        });
+    initialize(options) {
+        options = options || {};
+        this.appController = options.controllers.app;
+    },
+
+    index() {
+        this.appController.index();
     }
 });
 

@@ -7,17 +7,17 @@ let App = function() {
 };
 
 App.prototype.initialize = function() {
-  this.appController = new Controller();
   this.router = new Router({
     controllers: {
-      app: this.appController
+      app: new Controller()
     }
   });
 };
 
 App.prototype.start = function() {
   Backbone.history.start({
-    pushState: true
+    pushState: window.history && window.history.pushState,
+    root: '/'
   });
 };
 

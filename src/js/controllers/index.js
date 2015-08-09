@@ -1,8 +1,8 @@
 import Backbone from 'backbone';
 
 // Views
-import RootView from './views/root';
-import Homepage from './views/main/homepage';
+import RootView from '../views/root';
+import Homepage from '../views/main/homepage';
 
 let AppController = Backbone.View.extend({
     el: 'body',
@@ -13,7 +13,7 @@ let AppController = Backbone.View.extend({
 
     index() {
         let homepage = new Homepage();
-        this.rootView.setView('homepage', {trigger: true});
+        this.rootView.setView(homepage, {trigger: true});
     }
 });
 

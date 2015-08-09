@@ -36,7 +36,7 @@
     "watch": "watchify ./src/index.js -o './node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js' -d -v",
     "build-css": "node-sass ./public/scss/main.scss ./public/css/main.css",
     "watch-css": "nodemon -e scss -x 'npm run build-css'",
-    "dev": "beefy ./src/index.js 3000 --index=./src/index.html --live"
+    "serve": "beefy ./src/index.js 3000 --index=./src/index.html --live"
   },
   "browserify": {
     "transform": [

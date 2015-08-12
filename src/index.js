@@ -2,6 +2,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import App from './js/index';
+import L from 'leaflet';
 
 Backbone.$ = $;
 window._ = _;

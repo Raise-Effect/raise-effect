@@ -12,22 +12,42 @@
   "dependencies": {
     "d3": "^3.5.6",
     "jquery": "^2.1.4",
+    "leaflet": "^1.0.0-beta.1",
     "lodash": "^3.10.0",
     "moment": "^2.10.3"
   },
   "devDependencies": {
+    "babelify": "^6.1.3",
     "backbone": "^1.2.1",
-    "browserify": "^10.2.6",
+    "beefy": "^2.1.5",
+    "bootstrap": "^3.3.5",
+    "browserify": "^11.0.1",
+    "exorcist": "0.4.0",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.5.2",
+    "handlebars": "^3.0.3",
+    "hbsfy": "^2.2.1",
+    "node-sass": "^3.2.0",
+    "nodemon": "^1.4.0",
     "watchify": "^3.2.3"
   },
-  "scripts": {},
-  "browserify": {},
+  "scripts": {
+    "build": "browserify ./src/index.js -d | ./node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js",
+    "watch": "watchify ./src/index.js -o './node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js' -d -v",
+    "build-css": "node-sass ./public/scss/main.scss ./public/css/main.css",
+    "watch-css": "nodemon -e scss -x 'npm run build-css'",
+    "serve": "beefy ./src/index.js 3000 --index=./src/index.html --live"
+  },
+  "browserify": {
+    "transform": [
+      "hbsfy",
+      "babelify"
+    ]
+  },
   "directories": {},
   "author": {
     "name": "Team Minimum Wage-Hack Oregon",
     "url": "http://www.hackoregon.org/"
   },
-  "license": ""
+  "license": "MIT"
 }

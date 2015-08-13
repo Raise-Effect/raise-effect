@@ -1,0 +1,58 @@
+@import "../../../node_modules/leaflet/dist/leaflet.css";
+
+html,
+body {
+    color: #222;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 65%;
+}
+
+svg {
+    display: block;
+}
+
+.chart rect {
+    fill: steelblue;
+}
+
+.chart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+.chart {
+    margin: 10px 0 10px 0;
+}
+
+.svg-container {
+    border: 1px solid black;
+    margin: 5px 0 0 0;
+    width: 421px;
+}
+
+#map {
+    height: 600px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}

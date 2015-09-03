@@ -1,5 +1,7 @@
 import Backbone from 'backbone';
 import L from 'leaflet';
+import Counties from "./../../../fixtures/countiesGeoJSON.js";
+import MonthlyCosts from "./../../../fixtures/selfsufficiency.js";
 
 let MapView = Backbone.View.extend({
     name: 'map',
@@ -29,7 +31,7 @@ let MapView = Backbone.View.extend({
           id: 'mapbox.pencil'
         }).addTo(map);
 
-        L.geoJson(counties, {
+        L.geoJson(Counties, {
           // style: style,
           // onEachFeature: onEachFeature
         }).addTo(map);

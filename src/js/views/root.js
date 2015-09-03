@@ -17,6 +17,11 @@ let RootView = Backbone.View.extend({
 
     setView(view) {
         $('#main-content').html(view.render().el);
+    },
+
+    addMap(mapView) {
+        $('#map-container').html(mapView.render().el);
+        mapView.setupMap();
     }
 });
 

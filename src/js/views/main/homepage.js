@@ -4,7 +4,7 @@ import homepageTemplate from '../../templates/main/homepage.hbs';
 let HomepageView = Backbone.View.extend({
     name: 'homepage',
     template: homepageTemplate,
-    className: 'home',
+    className: 'col-xs-12',
 
     events: {},
 

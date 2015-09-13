@@ -11,11 +11,12 @@ Hack Oregon app for exploring minimum wage issues in our state.
 1. Make a new project directory and clone the repo:
 ```
 $ mkdir hack_oregon && cd hack_oregon
-$ git clone git@github.com:Jobs-Economy/test.git
+$ git clone git@github.com:Jobs-Economy/raise-effect.git
 ```
 
 2. Install dependencies via npm:
 ```
+
 $ npm install
 ```
 

@@ -13,7 +13,7 @@ let MapView = Backbone.View.extend({
     events: {},
 
     initialize() {
-        _.bindAll(this, 'styleFeature', 'setupFeature', 'resetStyle');
+        _.bindAll(this, 'styleFeature', 'setupFeature', 'resetStyle', 'zoomToFeature');
     },
 
     render() {
@@ -58,7 +58,7 @@ let MapView = Backbone.View.extend({
         layer.on({
           mouseover: this.highlightFeature,
           mouseout: this.resetStyle,
-          // click: zoomToFeature
+          click: this.zoomToFeature
         });
     },
 
@@ -84,6 +84,10 @@ let MapView = Backbone.View.extend({
         this.geoLayer.resetStyle(e.target);
     },
 
+    zoomToFeature(e) {
+        this.map.fitBounds(e.target.getBounds());
+    },
+
     setupMap() {
         var token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA',
             map   = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7),
@@ -105,6 +109,7 @@ let MapView = Backbone.View.extend({
         geoLayer.addTo(map);
 
         that.geoLayer = geoLayer;
+        that.map = map;
     },
 });
 

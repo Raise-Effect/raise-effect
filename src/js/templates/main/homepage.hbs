@@ -49,76 +49,6 @@
 
 //   legend.addTo(map);
 
-//   function style(feature) {
-//     return {
-//       weight: 2,
-//       opacity: 1,
-//       color: 'white',
-//       dashArray: '3',
-//       fillOpacity: 0.7,
-//       fillColor: getColorBasedOn(feature),
-//     };
-//   }
-
-//
-
-//   var geojson;
-
-//   function resetHighlight(e) {
-//     geojson.resetStyle(e.target);
-//     info.update();
-//   }
-
-//   function zoomToFeature(e) {
-//     map.fitBounds(e.target.getBounds());
-//   }
-
-//   function onEachFeature(feature, layer) {
-//     layer.on({
-//       mouseover: highlightFeature,
-//       mouseout: resetHighlight,
-//       click: zoomToFeature
-//     });
-//   }
-
-//   function getColor() {
-//     return '#3182bd';
-//   }
-
-
-//   function getHighlightColor() {
-//     return '#08306b';
-//   }
-
-//   function getColorBasedOn(feature) {
-//     var id = countyId(feature.properties.name);
-//     var medianIncome = 0;
-//     if(sampleCountiesJSON.hasOwnProperty(id)){
-//       var medianIncome = sampleCountiesJSON[id]["median household income"];
-//     };
-//     var medianIncome = sampleCountiesJSON[id]["median household income"];
-//     return getColorBasedOnNumber(medianIncome);
-//   }
-
-//   function getColorBasedOnNumber(medianIncome) {
-//     if (medianIncome < 35000) {
-//       return '#eff3ff';
-//     } else if (medianIncome >= 35000 && medianIncome < 40000) {
-//       return '#c6dbef';
-//     } else if (medianIncome >= 40000 && medianIncome < 45000) {
-//       return '#9ecae1';
-//     } else if (medianIncome >= 45000 && medianIncome < 50000) {
-//       return '#6baed6';
-//     } else if (medianIncome >= 50000 && medianIncome < 55000) {
-//       return '#3182bd';
-//     } else if (medianIncome >= 55000) {
-//       return '#08519c';
-//     };
-//   }
-
-//   function countyId(countyName) {
-//     return countyName.split(' County')[0];
-//   }
 
 //   function formattedCountyData(id) {
 //     var m = numberWithCommas(sampleCountiesJSON[id]["median household income"],0);
@@ -133,9 +63,4 @@
 //       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 //       return parts.join(".");
 //   }
-
-//   geojson = L.geoJson(counties, {
-//     style: style,
-//     onEachFeature: onEachFeature
-//   }).addTo(map);
 </script>

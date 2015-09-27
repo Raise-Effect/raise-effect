@@ -1,0 +1,22 @@
+#slider {
+    width: 80%;
+    margin: 40px auto;
+}
+
+.rc-slider-tooltip-inner {
+    width: auto;
+    height: auto;
+    padding: 6px;
+    font-size: 11px;
+    background-color: #000;
+    border-radius: 2px;
+    box-shadow: none;
+    vertical-align: middle;
+    &:before {
+        content: '$'
+    }
+}
+
+.rc-slider-tooltip-placement-points-bc-tc .rc-slider-tooltip-arrow {
+    border-top-color: #000;
+}

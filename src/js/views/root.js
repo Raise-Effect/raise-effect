@@ -2,6 +2,11 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import rootTemplate from '../templates/root.hbs';
 
+/*
+ * RootView: root view's main job is to register and deregister page-level
+ * views (ie, 'homepage', 'about us'), and to bind/unbind any app-global events.
+ */
+
 let RootView = Backbone.View.extend({
     name: 'root',
     template: 'rootTemplate',
@@ -16,18 +21,18 @@ let RootView = Backbone.View.extend({
     },
 
     setView(view) {
-        $('#main-content').html(view.render().el);
-    },
+        // method calls lifecycle methods, including render as well as
+        // prepare() and postRender() (if view extends custom base View class)
+        if (view.prepare) {
+            view.prepare();
+        }
 
-    addMap(mapView) {
-        $('#main-content div').append(mapView.render().el);
-        mapView.setupMap();
-    },
-		
-    addSlider(sliderView) {
-        $('#main-content div').append(sliderView.render().el);
-        sliderView.setupSlider();
-    },
+        $('#main-content').html(view.render().el);
+
+        if (view.postRender) {
+            view.postRender();
+        }
+    }
 });
 
 export default RootView;

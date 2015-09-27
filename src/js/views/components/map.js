@@ -4,10 +4,9 @@ import Counties from "./../../../fixtures/countiesGeoJSON.js";
 import MonthlyCosts from "./../../../fixtures/selfsufficiency.js";
 import SampleData from "./../../../fixtures/sampleCountyData.js";
 
+
 let MapView = Backbone.View.extend({
-    name: 'map',
-    tagName: 'div',
-    id: 'map',
+    name: 'Map',
     className: 'leaflet-container leaflet-retina leaflet-fade-anim',
 
     events: {},
@@ -18,6 +17,8 @@ let MapView = Backbone.View.extend({
 
     render() {
         this.$el.html();
+        this.setupMap();
+
         return this;
     },
 
@@ -33,8 +34,8 @@ let MapView = Backbone.View.extend({
     },
 
     fillColor(feature) {
-        var id = feature.properties.name.split(' County')[0],
-            medianIncome = SampleData[id]["median household income"];
+        let id = feature.properties.name.split(' County')[0];
+        let medianIncome = SampleData[id]["median household income"];
 
         switch (true) {
             case (medianIncome >= 55000):
@@ -63,7 +64,7 @@ let MapView = Backbone.View.extend({
     },
 
     highlightFeature(e) {
-        var layer = e.target;
+        let layer = e.target;
 
         layer.setStyle({
             weight: 5,
@@ -89,9 +90,8 @@ let MapView = Backbone.View.extend({
     },
 
     setupMap() {
-        var token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA',
-            map   = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7),
-            that  = this;
+        let token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA';
+        let map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7);
 
         map.dragging.disable();
         map.touchZoom.disable();
@@ -102,14 +102,14 @@ let MapView = Backbone.View.extend({
           id: 'mapbox.pencil'
         }).addTo(map);
 
-        var geoLayer = L.geoJson(Counties, {
-          style: that.styleFeature,
-          onEachFeature: that.setupFeature
-        })
+        let geoLayer = L.geoJson(Counties, {
+          style: _.bind(this.styleFeature, this),
+          onEachFeature: _.bind(this.setupFeature, this)
+        });
         geoLayer.addTo(map);
 
-        that.geoLayer = geoLayer;
-        that.map = map;
+        this.geoLayer = geoLayer;
+        this.map = map;
     },
 });
 

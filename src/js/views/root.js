@@ -22,7 +22,12 @@ let RootView = Backbone.View.extend({
     addMap(mapView) {
         $('#main-content div').append(mapView.render().el);
         mapView.setupMap();
-    }
+    },
+		
+    addSlider(sliderView) {
+        $('#main-content div').append(sliderView.render().el);
+        sliderView.setupSlider();
+    },
 });
 
 export default RootView;

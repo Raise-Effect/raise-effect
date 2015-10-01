@@ -3,7 +3,7 @@ import _ from 'lodash';
 import ReactSlider from 'rc-slider';
 
 
-let sliderView = React.createClass({
+let Slider = React.createClass({
 	getInitialState() {
 		return {
 			value: 13.50
@@ -33,4 +33,5 @@ let sliderView = React.createClass({
 	}
 });
 
-export default sliderView;
+export default Slider;
+

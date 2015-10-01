@@ -1,4 +1,4 @@
-var monthlyCosts = {
+let MonthlyCosts = {
   "oneAdult": {
     "title": "One Adult",
     "costs": {
@@ -24,3 +24,5 @@ var monthlyCosts = {
     }
   }
 };
+
+export default MonthlyCosts;

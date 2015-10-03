@@ -1,7 +1,7 @@
 import React from 'react';
 import View from '../view';
 import MapView from  '../components/map';
-import SliderBox from '../components/sliderBox';
+import Slider from '../components/slider';
 import homepageTemplate from '../../templates/main/homepage.hbs';
 
 
@@ -29,7 +29,7 @@ let HomepageView = View.extend({
         this.mapView.render();
 
         React.render(
-            <SliderBox />, document.getElementById('slider')
+            <Slider />, document.getElementById('slider')
         );
     }
 });

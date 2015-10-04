@@ -23,7 +23,6 @@
     "backbone": "^1.2.1",
     "beefy": "^2.1.5",
     "bootstrap": "^3.3.5",
-    "bootstrap-slider": "^5.1.0",
     "browserify": "^11.0.1",
     "exorcist": "0.4.0",
     "gulp": "^3.9.0",

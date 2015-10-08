@@ -91,7 +91,7 @@ let MapView = Backbone.View.extend({
 
     setupMap() {
         let token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA';
-        let map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 7);
+        let map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 6);
 
         map.dragging.disable();
         map.touchZoom.disable();

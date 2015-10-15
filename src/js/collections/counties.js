@@ -8,13 +8,7 @@ let Counties = Backbone.Collection.extend({
         return response.data;
     },
     initialize: function() {
-        this.fetch({
-            success: function(data) {
-                for (var i = 0; i < data.models.length; i++) {
-                    console.log(data.models[i].attributes);
-                };
-            }
-        });
+        this.fetch();
     }
 });
 

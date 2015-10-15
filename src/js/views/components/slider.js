@@ -19,4 +19,3 @@ let Slider = React.createClass({
 });
 
 export default Slider;
-

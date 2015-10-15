@@ -1,7 +1,8 @@
 import Backbone from 'backbone';
 import Router from './router';
 import Controller from './controllers/index';
-import Counties from './collections/counties';
+
+
 
 let App = function() {
     this.initialize();
@@ -14,7 +15,6 @@ App.prototype.initialize = function() {
         }
     });
 
-    this.counties = new Counties();
 };
 
 App.prototype.start = function() {

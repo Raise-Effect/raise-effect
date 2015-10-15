@@ -3,6 +3,8 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import L from 'leaflet';
 import App from './js/index';
+window.jQuery = $
+require('bootstrap');
 
 Backbone.$ = $;
 window._ = _;

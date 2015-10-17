@@ -1,7 +1,11 @@
 import React from "react";
 import Nav from "./views/components/nav";
+import api from "./api";
 
 let App = React.createClass({
+  componentDidMount: function() {
+    api.getCounties();
+  },
   render: function() {
     return (
       <div>

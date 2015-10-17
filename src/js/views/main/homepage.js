@@ -6,6 +6,7 @@ import Households from '../components/households';
 import homepageTemplate from '../../templates/main/homepage.hbs';
 import ProgressBar from '../components/progressBar';
 import Counties from '../../collections/counties';
+import {render} from "react-dom";
 
 let HomepageView = View.extend({
     name: 'homepage',
@@ -29,14 +30,13 @@ let HomepageView = View.extend({
     postRender() {
         this.mapView.render();
 
-
-        React.render(
+        render(
             <SliderBox />, document.getElementById('slider')
         );
-        React.render(
+        render(
             <Households />, document.getElementById('households')
         );
-        React.render(
+        render(
             <ProgressBar completed={47}/>, document.getElementById('impactProgress')
         )
 

@@ -9,7 +9,7 @@ let Households = React.createClass({
         <h2>Households</h2>
         <FamilyTypeBreakdown percentage="50" name="Single Adult" makeupPercentage="20"/>
         <FamilyTypeBreakdown percentage="25" name="Two Adults One Child" makeupPercentage="35"/>
-        <FamilyTypeBreakdown percentage="10" name="Two Adults Two Children" makeupPercentage="30"/>
+        <FamilyTypeBreakdown percentage="10" name="One Adult Two Children" makeupPercentage="30"/>
       </div>
 		);
 	}

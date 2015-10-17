@@ -4,6 +4,7 @@ import MonthlyCosts from "./../../../fixtures/selfsufficiency.js";
 import SampleData from "./../../../fixtures/sampleCountyData.js";
 import React from "react";
 import {findDOMNode} from "react-dom";
+import _ from "lodash";
 
 let MapView = React.createClass({
   componentDidMount: function() {

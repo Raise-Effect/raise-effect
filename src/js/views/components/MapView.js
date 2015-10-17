@@ -123,12 +123,12 @@ let MapView = React.createClass({
     },
 
     focusOnMap: function() {
-        this.map.setView([44.121, -120.587], 6);
+        this.map.setView([44.121, -120.587], 6, {animate: true, pan: {animate: true, duration: 1}, zoom: {animate: true}});
     },
 
     focusOnLayer: function(event) {
         var layer = (typeof event.target === 'undefined') ? event : event.target;
-        this.map.fitBounds(layer.getBounds());
+        this.map.fitBounds(layer.getBounds(), {animate: true, pan: {animate: true, duration: 1}, zoom: {animate: true}});
     },
 
     render: function() {

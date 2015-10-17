@@ -5,16 +5,47 @@ import ProgressBar from './views/components/progressBar';
 import MapView from './views/components/MapView';
 import counties from './../fixtures/counties';
 import _ from 'lodash';
+import api from './api';
 
 let HomePage = React.createClass({
     getInitialState: function() {
-        return {selectedCounty: {fips: "41", name: "Oregon"}}
+        return {
+            sliderWage: 13.50,
+            selectedCounty: {fips: "41", name: "Oregon"},
+            countySSSWages: {},
+            groups: [
+              {familyCode: 'a1i0p0s0t0', name: 'Single Adult'},
+              {familyCode: 'a2i0p0s0t1', name: 'Two Adults One Child'},
+              {familyCode: 'a1i0p2s0t0', name: 'One Adult Two Children'}
+            ]
+        }
     },
-
+    componentWillMount: function() {
+      this.applyCountyData(this.state.selectedCounty.fips);
+    },
+    handleSliderWageChange: function(value) {
+      this.setState({
+        sliderWage: value
+      });
+    },
+    applyCountyData: function(fips) {
+      api.getSSSWages(fips).done((data) => {
+        this.state.countySSSWages[fips] = data.data;
+        this.setState(this.state);
+      })
+    },
     selectCounty: function(county) {
-        this.setState({selectedCounty: county});
+        this.setState({selectedCounty: county}, () => {
+          this.applyCountyData(this.state.selectedCounty.fips)
+        });
     },
-
+    getSSSWageData: function() {
+      var data = this.state.countySSSWages[this.state.selectedCounty.fips];
+      if (!_.isEmpty(data)) {
+        return _.map(this.state.groups, (group) => _.find(data, (item) => item.familyCode == group.familyCode));
+      }
+      return null;
+    },
     render: function() {
         return (
             <div className="col-xs-12">
@@ -31,7 +62,10 @@ let HomePage = React.createClass({
                     <div className="col-md-12 component wage-slider">
                         <h2>How would you raise the minimum wage?</h2>
                         <div id="slider">
-                          <SliderBox />
+                          <SliderBox
+                            value={this.state.sliderWage}
+                            onChange={this.handleSliderWageChange}
+                          />
                         </div>
                     </div>
                 </div>
@@ -53,9 +87,9 @@ let HomePage = React.createClass({
                               </button>
                               <ul className="dropdown-menu">
                                 { _.map(counties, (county) => {
-                                    return <li onClick={_.bind(this.selectCounty, this, county)}>{county.name}</li>
+                                    return <li key={county.fips} onClick={_.bind(this.selectCounty, this, county)}>{county.name}</li>
+                                  })
                                 }
-                                )}
                               </ul>
                             </div>
                         </h3>
@@ -66,7 +100,11 @@ let HomePage = React.createClass({
                     </div>
 
                     <div className="col-md-6 component households" id="households">
-                      <Households />
+                      <Households 
+                        annualWage={this.state.sliderWage * 8 * 5 * 4 * 12}
+                        groups={this.state.groups} 
+                        data={this.getSSSWageData()}
+                      />
                     </div>
                 </div>
             </div>

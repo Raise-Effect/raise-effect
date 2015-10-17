@@ -33,14 +33,17 @@ let MapView = React.createClass({
     componentWillUpdate: function(data) {
         let fips   = data.selectedCounty.toString();
         let layers = this.geoLayer.getLayers();
-        let map    = this.map;
         let that   = this;
 
-        _.forEach(layers, function(layer) {
-            if (layer.feature.properties.fips === fips) {
-                that.zoomToFeature(layer);
-            }
-        });
+        if (fips === "41") {
+            that.focusOnMap();
+        } else {
+            _.forEach(layers, function(layer) {
+                if (layer.feature.properties.fips === fips) {
+                    that.focusOnFeature(layer);
+                }
+            });
+        }
     },
 
     styleFeature(feature) {
@@ -80,7 +83,7 @@ let MapView = React.createClass({
         layer.on({
             mouseover: this.highlightFeature,
             mouseout: this.resetStyle,
-            click: this.zoomToFeature
+            click: this.focusOnFeature
         });
     },
 
@@ -104,7 +107,11 @@ let MapView = React.createClass({
         this.geoLayer.resetStyle(e.target);
     },
 
-    zoomToFeature(event) {
+    focusOnMap() {
+        this.map.setView([44.121, -120.587], 6);
+    },
+
+    focusOnFeature(event) {
         var feature = (typeof event.target === 'undefined') ? event : event.target;
         this.map.fitBounds(feature.getBounds());
     },

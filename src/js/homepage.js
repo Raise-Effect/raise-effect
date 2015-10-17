@@ -15,8 +15,8 @@ let HomePage = React.createClass({
             countySSSWages: {},
             groups: [
               {familyCode: 'a1i0p0s0t0', name: 'Single Adult'},
+              {familyCode: 'a1i0p2s0t0', name: 'One Adult Two Children'},
               {familyCode: 'a2i0p0s0t1', name: 'Two Adults One Child'},
-              {familyCode: 'a1i0p2s0t0', name: 'One Adult Two Children'}
             ]
         }
     },

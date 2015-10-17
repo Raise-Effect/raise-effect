@@ -16,6 +16,7 @@ let Households = React.createClass({
       var familyCodeData = this.getFamilyCodeData(group.familyCode);
       
       if (!familyCodeData) return null;
+      console.log(familyCodeData.annual);
 
       var percentage = Math.round((this.props.annualWage / Math.ceil(familyCodeData.annual)) * 100)
       return (

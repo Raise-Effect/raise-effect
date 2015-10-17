@@ -16,7 +16,8 @@
     "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "rc-slider": "^1.4.5",
-    "react": "^0.14.0"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
     "babelify": "^6.1.3",

@@ -3,28 +3,22 @@ import FamilyTypeBreakdown from '../components/familyTypeBreakdown';
 import _ from "lodash";
 
 let Households = React.createClass({
-  getFamilyCodeData: function(familyCode) {
-    return _.find(this.props.data, (item) => item.familyCode == familyCode);
+  getDefaultProps: function() {
+    return {
+      data: {}
+    };
+  },
+  getPercentage: function(top, value) {
+    return Math.ceil( (top / value) * 100 );
   },
   getFamilyBreakdown: function() {
-    if (_.isEmpty(this.props.data)) {
-      return (
-        <div>No data. Please change your county</div>
-      )
-    }
     return _.map(this.props.groups, (group) => {
-      var familyCodeData = this.getFamilyCodeData(group.familyCode);
-      
-      if (!familyCodeData) return null;
-      console.log(familyCodeData.annual);
-
-      var percentage = Math.round((this.props.annualWage / Math.ceil(familyCodeData.annual)) * 100)
       return (
         <FamilyTypeBreakdown 
-          key={group.familyCode}
-          percentage={percentage}
+          key={group.populationKey}
           name={group.name}
-          makeupPercentage={20}
+          percentage={1}
+          makeupPercentage={this.getPercentage(this.props.data[group.populationKey], this.props.data.totalHouseHolds)}
         />
       )
     })

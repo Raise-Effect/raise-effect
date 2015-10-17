@@ -5,46 +5,78 @@ import ProgressBar from './views/components/progressBar';
 import MapView from './views/components/MapView';
 import counties from './../fixtures/counties';
 import _ from 'lodash';
+import $ from 'jquery';
 import api from './api';
+
+let singleAdultTypes = [
+  "a1i0p0s0t0"
+]
+
+let singleParentFamilyTypes = [
+  "a1i2p0s0t0",
+  "a1i1p1s0t0",
+  "a1i1p0s1t0",
+  "a1i1p0s0t1",
+  "a1i0p2s0t0",
+  "a1i0p1s1t0",
+  "a1i0p1s0t1",
+  "a1i0p0s2t0",
+  "a1i0p0s1t1",
+  "a1i0p0s0t2",
+]
+
+let marriedParentFamilyTypes = [
+  "a2i2p0s0t0",
+  "a2i1p1s0t0",
+  "a2i1p0s1t0",
+  "a2i1p0s0t1",
+  "a2i0p2s0t0",
+  "a2i0p1s1t0",
+  "a2i0p1s0t1",
+  "a2i0p0s2t0",
+  "a2i0p0s1t1",
+  "a2i0p0s0t2",
+]
+
 
 let HomePage = React.createClass({
     getInitialState: function() {
         return {
             sliderWage: 13.50,
             selectedCounty: {fips: "41", name: "Oregon"},
-            countySSSWages: {},
+            census: {},
+            weight: {},
+            ssswages: {},
             groups: [
-              {familyCode: 'a1i0p0s0t0', name: 'Single Adult'},
-              {familyCode: 'a1i0p2s0t0', name: 'One Adult Two Children'},
-              {familyCode: 'a2i0p0s0t1', name: 'Two Adults One Child'},
+              {populationKey: 'totalSingleAdults', name: 'Single Adult'},
+              {populationKey: 'totalSingleParents', name: 'One Adult Two Children'},
+              {populationKey: 'totalMarriedParents', name: 'Two Adults One Child'},
             ]
         }
     },
     componentWillMount: function() {
-      this.applyCountyData(this.state.selectedCounty.fips);
+      this.loadData();
     },
+    loadData: function() {
+      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages())
+      .done((censusData, weightData, sssData) => {
+        this.setState({
+          census: _.indexBy(censusData[0].data, 'fips'),
+          weight: _.groupBy(weightData[0].data, 'fips'),
+          ssswages: _.groupBy(sssData[0].data, 'fips'),
+        });
+      })
+    },
+
     handleSliderWageChange: function(value) {
       this.setState({
         sliderWage: value
       });
     },
-    applyCountyData: function(fips) {
-      api.getSSSWages(fips).done((data) => {
-        this.state.countySSSWages[fips] = data.data;
-        this.setState(this.state);
-      })
-    },
     selectCounty: function(county) {
-        this.setState({selectedCounty: county}, () => {
-          this.applyCountyData(this.state.selectedCounty.fips)
-        });
-    },
-    getSSSWageData: function() {
-      var data = this.state.countySSSWages[this.state.selectedCounty.fips];
-      if (!_.isEmpty(data)) {
-        return _.map(this.state.groups, (group) => _.find(data, (item) => item.familyCode == group.familyCode));
-      }
-      return null;
+      this.setState({
+        selectedCounty: county
+      });
     },
     render: function() {
         return (
@@ -101,9 +133,8 @@ let HomePage = React.createClass({
 
                     <div className="col-md-6 component households" id="households">
                       <Households 
-                        annualWage={this.state.sliderWage * 8 * 5 * 4 * 12}
                         groups={this.state.groups} 
-                        data={this.getSSSWageData()}
+                        data={{}}
                       />
                     </div>
                 </div>

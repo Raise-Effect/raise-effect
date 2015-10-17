@@ -7,7 +7,7 @@ import {findDOMNode} from "react-dom";
 import _ from "lodash";
 
 let MapView = React.createClass({
-  componentDidMount: function() {
+    componentDidMount: function() {
         let token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA';
         let map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 6);
 
@@ -28,15 +28,26 @@ let MapView = React.createClass({
 
         this.geoLayer = geoLayer;
         this.map = map;
-  },
-  styleFeature(feature) {
+    },
+
+    componentWillUpdate: function(data) {
+        let fips   = data.selectedCounty.toString();
+        let layers = this.geoLayer.getLayers();
+        let map    = this.map;
+
+        _.forEach(layers, function(layer) {
+            if (layer.feature.properties.fips === fips) map.fitBounds(layer.getBounds());
+        });
+    },
+
+    styleFeature(feature) {
         return {
-          weight: 2,
-          opacity: 1,
-          color: 'white',
-          dashArray: '3',
-          fillOpacity: 0.7,
-          fillColor: this.fillColor(feature)
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7,
+            fillColor: this.fillColor(feature)
         };
     },
 
@@ -64,9 +75,9 @@ let MapView = React.createClass({
 
     setupFeature(feature, layer) {
         layer.on({
-          mouseover: this.highlightFeature,
-          mouseout: this.resetStyle,
-          click: this.zoomToFeature
+            mouseover: this.highlightFeature,
+            mouseout: this.resetStyle,
+            click: this.zoomToFeature
         });
     },
 
@@ -84,8 +95,6 @@ let MapView = React.createClass({
         if (!L.Browser.ie && !L.Browser.opera) {
             layer.bringToFront();
         }
-
-        // info.update(layer.feature.properties);
     },
 
     resetStyle(e) {
@@ -95,11 +104,12 @@ let MapView = React.createClass({
     zoomToFeature(e) {
         this.map.fitBounds(e.target.getBounds());
     },
-  render: function() {
-    return (
-      <div className="leaflet-container leaflet-retina leaflet-fade-anim"></div>
-    )
-  }
+
+    render: function() {
+        return (
+            <div className="leaflet-container leaflet-retina leaflet-fade-anim"></div>
+        )
+    }
 });
 
 

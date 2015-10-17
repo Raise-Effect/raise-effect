@@ -8,22 +8,22 @@ let api = {
       url: BASE_URL + (fips || '')
     })
   },
-  getLaborStats: (fips) {
+  getLaborStats: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/laborstats' : 'laborstats' )
     })
   },
-  getPopulation: (fips) {
+  getPopulation: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/population' : 'population' )
     })
   },
-  getFamilyType: (fips) {
+  getFamilyType: (fips) => {
     return $.ajax({
       url: BASE_URL + 'familytype'
     })
   },
-  getWageStats: (fips, year) {
+  getWageStats: (fips, year) => {
     let url = BASE_URL;
     if (!fips) {
       url += 'wagestats';
@@ -37,27 +37,27 @@ let api = {
       url: url
     })
   },
-  getCalculatedStats: (fips) {
+  getCalculatedStats: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/calculatedstats' : 'calculatedstats' )
     })
   },
-  getSSSBudget: (fips) {
+  getSSSBudget: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/sssbudget' : 'sssbudget' )
     })
   },
-  getSSSCredits: (fips) {
+  getSSSCredits: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/ssscredits' : 'ssscredits' )
     })
   },
-  getSSSWages: (fips) {
+  getSSSWages: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/ssswages' : 'ssswages' )
     })
   },
-  getPuma: (fips) {
+  getPuma: (fips) => {
     return $.ajax({
       url: BASE_URL + ( fips ? fips + '/puma' : 'puma' )
     })

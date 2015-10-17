@@ -34,9 +34,12 @@ let MapView = React.createClass({
         let fips   = data.selectedCounty.toString();
         let layers = this.geoLayer.getLayers();
         let map    = this.map;
+        let that   = this;
 
         _.forEach(layers, function(layer) {
-            if (layer.feature.properties.fips === fips) map.fitBounds(layer.getBounds());
+            if (layer.feature.properties.fips === fips) {
+                that.zoomToFeature(layer);
+            }
         });
     },
 
@@ -101,8 +104,9 @@ let MapView = React.createClass({
         this.geoLayer.resetStyle(e.target);
     },
 
-    zoomToFeature(e) {
-        this.map.fitBounds(e.target.getBounds());
+    zoomToFeature(event) {
+        var feature = (typeof event.target === 'undefined') ? event : event.target;
+        this.map.fitBounds(feature.getBounds());
     },
 
     render: function() {

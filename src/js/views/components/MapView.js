@@ -21,7 +21,7 @@ let MapView = React.createClass({
         }).addTo(map);
 
         let geoLayer = L.geoJson(Counties, {
-          style: _.bind(this.styleFeature, this),
+          style: _.bind(this.styleLayer, this),
           onEachFeature: _.bind(this.setupFeature, this)
         });
         geoLayer.addTo(map);
@@ -35,31 +35,46 @@ let MapView = React.createClass({
         let layers = this.geoLayer.getLayers();
         let that   = this;
 
-        if (fips === "41") {
-            that.focusOnMap();
-        } else {
-            _.forEach(layers, function(layer) {
-                if (layer.feature.properties.fips === fips) {
-                    that.focusOnFeature(layer);
-                }
-            });
-        }
+        _.forEach(layers, function(layer) {
+            that.styleLayer(layer);
+            that.resetLayer(layer);
+
+            if (fips === "41") return that.focusOnMap();
+
+            if (layer.feature.properties.fips === fips) {
+                that.focusOnLayer(layer);
+            } else {
+                that.hideLayer(layer);
+            }
+        });
     },
 
-    styleFeature(feature) {
+    setupFeature: function(feature, layer) {
+        layer.on({
+            mouseover: this.highlightLayer,
+            mouseout: this.resetLayer,
+            click: this.focusOnLayer
+        });
+    },
+
+    styleLayer: function(layer) {
         return {
+            stroke: true,
             weight: 2,
             opacity: 1,
             color: 'white',
             dashArray: '3',
+            fill: true,
             fillOpacity: 0.7,
-            fillColor: this.fillColor(feature)
+            fillColor: this.fillColor(layer)
         };
     },
 
-    fillColor(feature) {
-        let id = feature.properties.name.split(' County')[0];
-        let medianIncome = SampleData[id]["median household income"];
+    fillColor: function(layer) {
+        // let id = layer.properties.name.split(' County')[0];
+        // let medianIncome = SampleData[id]["median household income"];
+
+        let medianIncome = Math.random() * (60000 - 35000) + 35000;
 
         switch (true) {
             case (medianIncome >= 55000):
@@ -79,16 +94,8 @@ let MapView = React.createClass({
         }
     },
 
-    setupFeature(feature, layer) {
-        layer.on({
-            mouseover: this.highlightFeature,
-            mouseout: this.resetStyle,
-            click: this.focusOnFeature
-        });
-    },
-
-    highlightFeature(e) {
-        let layer = e.target;
+    highlightLayer: function(event) {
+        let layer = event.target;
 
         layer.setStyle({
             weight: 5,
@@ -103,17 +110,25 @@ let MapView = React.createClass({
         }
     },
 
-    resetStyle(e) {
-        this.geoLayer.resetStyle(e.target);
+    resetLayer: function(event) {
+        var layer = (typeof event.target === 'undefined') ? event : event.target;
+        this.geoLayer.resetStyle(layer);
     },
 
-    focusOnMap() {
+    hideLayer: function(layer) {
+        layer.setStyle({
+            stroke: false,
+            fill: false,
+        });
+    },
+
+    focusOnMap: function() {
         this.map.setView([44.121, -120.587], 6);
     },
 
-    focusOnFeature(event) {
-        var feature = (typeof event.target === 'undefined') ? event : event.target;
-        this.map.fitBounds(feature.getBounds());
+    focusOnLayer: function(event) {
+        var layer = (typeof event.target === 'undefined') ? event : event.target;
+        this.map.fitBounds(layer.getBounds());
     },
 
     render: function() {
@@ -122,6 +137,5 @@ let MapView = React.createClass({
         )
     }
 });
-
 
 export default MapView;

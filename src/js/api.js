@@ -62,6 +62,16 @@ let api = {
       url: BASE_URL + ( fips ? fips + '/puma' : 'puma' )
     })
   },
+  getCensusHousehold: (fips) => {
+    return $.ajax({
+      url: BASE_URL + ( fips ? fips + '/censushousehold' : 'censushousehold' )
+    })
+  },
+  getWeights: (fips) => {
+    return $.ajax({
+      url: BASE_URL + ( fips ? fips + '/familycodeweight' : 'familycodeweight' )
+    })
+  },
 }
 
 export default api

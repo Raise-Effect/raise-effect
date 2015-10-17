@@ -1,8 +1,11 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import jQuery from 'jquery';
 import Backbone from 'backbone';
 import L from 'leaflet';
 import App from './js/index';
+window.jQuery = jQuery;
+require('bootstrap');
 
 Backbone.$ = $;
 window._ = _;

@@ -48,9 +48,9 @@ let HomePage = React.createClass({
             weight: {},
             ssswages: {},
             groups: [
-              {populationKey: 'totalSingleAdults', name: 'Single Adult'},
-              {populationKey: 'totalSingleParents', name: 'One Adult Two Children'},
-              {populationKey: 'totalMarriedParents', name: 'Two Adults One Child'},
+              {groupedFamilyCodes: singleAdultTypes, populationKey: 'singleAdult', name: 'Single Adult'},
+              {groupedFamilyCodes: singleParentFamilyTypes, populationKey: 'singleParent', name: 'One Adult Two Children'},
+              {groupedFamilyCodes: marriedParentFamilyTypes, populationKey: 'marriedFamily', name: 'Two Adults Two Children'},
             ]
         }
     },
@@ -63,11 +63,21 @@ let HomePage = React.createClass({
         this.setState({
           census: _.indexBy(censusData[0].data, 'fips'),
           weight: _.groupBy(weightData[0].data, 'fips'),
-          ssswages: _.groupBy(sssData[0].data, 'fips'),
+          ssswages: _.groupBy(this.getOregonWages(sssData[0].data), 'fips')
         });
       })
     },
+    getOregonWages: function(data) {
+      var oregonFipsData = _(data).groupBy('familyCode').map((codeData, key) => {
+        return { 
+                  familyCode: key,
+                  fips: '41', 
+                  annual: _.sum(codeData, (countyData) => countyData.annual) / (_.size(codeData) + 1)
+                }
+      }).value()
 
+      return data.concat(oregonFipsData);
+    },
     handleSliderWageChange: function(value) {
       this.setState({
         sliderWage: value
@@ -77,6 +87,43 @@ let HomePage = React.createClass({
       this.setState({
         selectedCounty: county
       });
+    },
+    getPopulationPercents: function() {
+      if (!this.state.census[this.state.selectedCounty.fips]) return;
+
+      var {
+        totalHouseHolds,
+        totalMarriedParents,
+        totalSingleAdults,
+        totalSingleParents
+      } = this.state.census[this.state.selectedCounty.fips];
+      return {
+        singleAdult: Math.ceil( (totalSingleAdults/totalHouseHolds) * 100 ),
+        singleParent: Math.ceil( (totalSingleParents/totalHouseHolds) * 100 ),
+        marriedFamily: Math.ceil( (totalMarriedParents/totalHouseHolds) * 100 ),
+      }
+    },
+    getSufficienyPercents: function() {
+      var selectedAnnualWage = this.state.sliderWage * 8 * 5 * 4 * 12;
+      var countyWages = this.state.ssswages[this.state.selectedCounty.fips];
+      var countyWeights = this.state.weight[this.state.selectedCounty.fips];
+      return {
+        singleAdult: this.getAggregatePercent(selectedAnnualWage, this.state.groups[0].groupedFamilyCodes, countyWages, countyWeights),
+        singleParent: this.getAggregatePercent(selectedAnnualWage, this.state.groups[1].groupedFamilyCodes, countyWages, countyWeights),
+        marriedFamily: this.getAggregatePercent(selectedAnnualWage * 2, this.state.groups[2].groupedFamilyCodes, countyWages, countyWeights)
+      }
+    },
+    getAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
+
+      var a = Math.ceil(_(familyCodes).map( (code) => {
+        var annual = _.find(countyWages, (wage) => wage.familyCode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familycode === code);
+
+        if (!annual) return 0;
+        return Math.ceil(wage) >= Math.ceil(annual.annual) ? (weight && weight.weight || 1) : 0;
+      }).sum() * 100)
+
+      return a;
     },
     render: function() {
         return (
@@ -134,7 +181,8 @@ let HomePage = React.createClass({
                     <div className="col-md-6 component households" id="households">
                       <Households 
                         groups={this.state.groups} 
-                        data={{}}
+                        population={this.getPopulationPercents()}
+                        sufficieny={this.getSufficienyPercents()}
                       />
                     </div>
                 </div>

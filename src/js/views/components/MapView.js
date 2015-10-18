@@ -53,7 +53,7 @@ let MapView = React.createClass({
         layer.on({
             mouseover: this.highlightLayer,
             mouseout: this.resetLayer,
-            click: this.focusOnLayer
+            click: this.handleClick
         });
     },
 
@@ -124,6 +124,11 @@ let MapView = React.createClass({
 
     focusOnMap: function() {
         this.map.setView([44.121, -120.587], 6, {animate: true, pan: {animate: true, duration: 1}, zoom: {animate: true}});
+    },
+
+    handleClick: function(event) {
+      var layer = (typeof event.target === 'undefined') ? event : event.target;
+      this.props.onMapSelect({name: layer.feature.properties.name, fips: layer.feature.properties.fips})
     },
 
     focusOnLayer: function(event) {

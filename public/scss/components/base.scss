@@ -1,3 +1,10 @@
 .component {
     text-align: center;
 }
+.dropdown-menu > li > a {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  z-index:9999;
+}

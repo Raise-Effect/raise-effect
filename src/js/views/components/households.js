@@ -5,20 +5,19 @@ import _ from "lodash";
 let Households = React.createClass({
   getDefaultProps: function() {
     return {
-      data: {}
+      data: {},
+      population: {},
+      sufficieny: {}
     };
-  },
-  getPercentage: function(top, value) {
-    return Math.ceil( (top / value) * 100 );
   },
   getFamilyBreakdown: function() {
     return _.map(this.props.groups, (group) => {
       return (
-        <FamilyTypeBreakdown 
+        <FamilyTypeBreakdown
           key={group.populationKey}
           name={group.name}
-          percentage={1}
-          makeupPercentage={this.getPercentage(this.props.data[group.populationKey], this.props.data.totalHouseHolds)}
+          percentage={this.props.sufficieny[group.populationKey] || 0}
+          makeupPercentage={this.props.population[group.populationKey] || 0}
         />
       )
     })

@@ -48,6 +48,7 @@ let HomePage = React.createClass({
             census: {},
             weight: {},
             ssswages: {},
+            wageStats: {},
             population: {},
             groups: [
               {groupedFamilyCodes: singleAdultTypes, populationKey: 'singleAdult', name: 'Single Adult'},
@@ -66,11 +67,12 @@ let HomePage = React.createClass({
       this.loadData();
     },
     loadData: function() {
-      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages(), api.getPopulation())
-      .done((censusData, weightData, sssData, popData) => {
+      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages(), api.getPopulation(), api.getWageStats())
+      .done((censusData, weightData, sssData, popData, wageData) => {
         this.setState({
           census: _.indexBy(censusData[0].data, 'fips'),
           weight: _.groupBy(weightData[0].data, 'fips'),
+          wageStats: _.groupBy(wageData[0].data, 'fips'),
           ssswages: _.groupBy(this.getOregonWages(sssData[0].data), 'fips'),
           population: _.groupBy(this.getOregonMedian(popData[0].data), 'fips')
         });
@@ -214,7 +216,7 @@ let HomePage = React.createClass({
                               </button>
                               <ul className="dropdown-menu">
                                 { _.map(counties, (county) => {
-                                    return <li key={county.fips} onClick={_.bind(this.selectCounty, this, county)}>{county.name}</li>
+                                    return <li key={county.fips} onClick={_.bind(this.selectCounty, this, county)}><a>{county.name}</a></li>
                                   })
                                 }
                               </ul>
@@ -222,7 +224,7 @@ let HomePage = React.createClass({
                         </h3>
 
                         <div id="map">
-                          <MapView selectedCounty={this.state.selectedCounty.fips} />
+                          <MapView selectedCounty={this.state.selectedCounty.fips} onMapSelect={this.selectCounty} sliderWage={this.state.sliderWage} wages={this.state.wageStats} />
                         </div>
                     </div>
 

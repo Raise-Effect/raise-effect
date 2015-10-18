@@ -47,6 +47,7 @@ let HomePage = React.createClass({
             census: {},
             weight: {},
             ssswages: {},
+            wageStats: {},
             groups: [
               {populationKey: 'totalSingleAdults', name: 'Single Adult'},
               {populationKey: 'totalSingleParents', name: 'One Adult Two Children'},
@@ -58,12 +59,13 @@ let HomePage = React.createClass({
       this.loadData();
     },
     loadData: function() {
-      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages())
-      .done((censusData, weightData, sssData) => {
+      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages(), api.getWageStats())
+      .done((censusData, weightData, sssData, wageData) => {
         this.setState({
           census: _.indexBy(censusData[0].data, 'fips'),
           weight: _.groupBy(weightData[0].data, 'fips'),
           ssswages: _.groupBy(sssData[0].data, 'fips'),
+          wageStats: _.groupBy(wageData[0].data, 'fips')
         });
       })
     },
@@ -127,13 +129,13 @@ let HomePage = React.createClass({
                         </h3>
 
                         <div id="map">
-                          <MapView selectedCounty={this.state.selectedCounty.fips} />
+                          <MapView selectedCounty={this.state.selectedCounty.fips} sliderWage={this.state.sliderWage} wages={this.state.wageStats} />
                         </div>
                     </div>
 
                     <div className="col-md-6 component households" id="households">
-                      <Households 
-                        groups={this.state.groups} 
+                      <Households
+                        groups={this.state.groups}
                         data={{}}
                       />
                     </div>

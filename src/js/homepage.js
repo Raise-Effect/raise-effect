@@ -2,6 +2,7 @@ import React from "react";
 import SliderBox from './views/components/sliderBox';
 import Households from './views/components/households';
 import ProgressBar from './views/components/progressBar';
+import SufficiencyBarChart from './views/components/sufficiencyBarChart';
 import MapView from './views/components/MapView';
 import counties from './../fixtures/counties';
 import _ from 'lodash';
@@ -51,6 +52,12 @@ let HomePage = React.createClass({
               {populationKey: 'totalSingleAdults', name: 'Single Adult'},
               {populationKey: 'totalSingleParents', name: 'One Adult Two Children'},
               {populationKey: 'totalMarriedParents', name: 'Two Adults One Child'},
+            ],
+            barGroups: [
+              {populationKeys: singleAdultTypes, name: 'Single Adult', modifier: 1},
+              {populationKeys: singleParentFamilyTypes, name: 'One Adult Two Children', modifier: 1},
+              {populationKeys: [], name: 'Median', modifier: 1},
+              {populationKeys: marriedParentFamilyTypes, name: 'Two Adults One Child', modifier: 2},
             ]
         }
     },
@@ -132,12 +139,18 @@ let HomePage = React.createClass({
                     </div>
 
                     <div className="col-md-6 component households" id="households">
-                      <Households 
-                        groups={this.state.groups} 
+                      <Households
+                        groups={this.state.groups}
                         data={{}}
                       />
                     </div>
                 </div>
+                <SufficiencyBarChart selectedCounty={this.state.selectedCounty.fips}
+                                     weights={this.state.weight}
+                                     groups={this.state.barGroups}
+                                     wages={this.state.ssswages}
+                                     salary={this.state.sliderWage * 8 * 5 * 4 * 12}
+                                     />
             </div>
         )
     }

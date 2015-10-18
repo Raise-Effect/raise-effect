@@ -14,7 +14,7 @@ let Households = React.createClass({
   getFamilyBreakdown: function() {
     return _.map(this.props.groups, (group) => {
       return (
-        <FamilyTypeBreakdown 
+        <FamilyTypeBreakdown
           key={group.populationKey}
           name={group.name}
           percentage={1}

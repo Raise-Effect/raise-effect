@@ -1,24 +1,20 @@
 import L from 'leaflet';
 import Counties from "./../../../fixtures/countiesGeoJSON.js";
-import MonthlyCosts from "./../../../fixtures/selfsufficiency.js";
-import SampleData from "./../../../fixtures/sampleCountyData.js";
 import React from "react";
-import {findDOMNode} from "react-dom";
 import _ from "lodash";
 
 let MapView = React.createClass({
     componentDidMount: function() {
         let token = 'pk.eyJ1IjoibnJiZXJuYXJkIiwiYSI6IjdkMGZhZmMyNmI4YjgzN2I0ZjI2MjUxMWE5MjVjM2I1In0.kAeFFdUCeEc5lOqyaMvHkA';
-        let map = L.map('map', { zoomControl:true }).setView([44.121, -120.587], 6);
+        let map = L.map('map', { zoomControl:false }).setView([44.121, -120.587], 6);
 
         map.dragging.disable();
         map.touchZoom.disable();
         map.doubleClickZoom.disable();
         map.scrollWheelZoom.disable();
 
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + token, {
-          id: 'mapbox.pencil'
-        }).addTo(map);
+
+      
 
         let geoLayer = L.geoJson(Counties, {
           style: _.bind(this.styleLayer, this),
@@ -128,7 +124,7 @@ let MapView = React.createClass({
 
     handleClick: function(event) {
       var layer = (typeof event.target === 'undefined') ? event : event.target;
-      this.props.onMapSelect({name: layer.feature.properties.name, fips: layer.feature.properties.fips})
+      this.props.onMapSelect({name: layer.feature.properties.name, fips: layer.feature.properties.fips});
     },
 
     focusOnLayer: function(event) {

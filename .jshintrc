@@ -3,6 +3,7 @@
   "node": true,
   "undef": true,
   "unused": true,
+  "esnext": true,
   "globals": {
     "describe": true,
     "context": true,

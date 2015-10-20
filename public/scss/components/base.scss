@@ -1,3 +1,14 @@
+/* Whichever you want to use */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700|Roboto+Condensed:400,700);
+@font-face {
+  font-family: 'ChunkFiveRegular';
+  src: url('/public/images/Chunkfive.otf');
+  src: url('/public/images/Chunkfive.otf?#iefix') format('otf'),
+  url('/public/images/Chunkfive.otf') format('otf'),
+  url('/public/images/Chunkfive.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 .component {
     text-align: center;
 }
@@ -7,4 +18,52 @@
 
 .dropdown-menu {
   z-index:9999;
+}
+
+/* Font styling */
+
+h1, h2, h3, h4, h5, h6, p {
+margin­bottom: 6px;
+color: #393434;
+}
+
+h1, h2, h3 {
+font-­family: "Roboto Condensed", Helvetica, sans­serif;
+font-size: 50px;
+font-weight: 700;
+}
+
+h1 {
+font-size: 30px;
+}
+
+h2 {
+font-size: 20px;
+}
+
+h3 {
+font-size: 16px;
+}
+
+h4 {
+  font-family: "Robot Condensed", Helvetica, sans­serif;
+font-size: 20px;
+}
+
+h5, h6, p, body {
+  font-family: "Roboto", Helvetica, sans­serif;
+}
+
+h5 {
+font-weight: 700;
+font-size: 16px;
+}
+
+h6 {
+font-weight: 500;
+font-size: 16px;
+}
+
+p {
+font-size: 14px;
 }

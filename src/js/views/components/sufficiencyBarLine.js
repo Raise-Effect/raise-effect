@@ -11,7 +11,6 @@ let SufficiencyBarLine = React.createClass({
      return { percentage: 0};
    },
 	 render: function() {
-     if (isNaN(this.props.percentage) || this.props.percentage == Infinity) this.props.percent = 0;
      let percent = this.props.percentage;
      let color = classNames("progress-fill", "under")
      if (this.props.percentage >= 150)

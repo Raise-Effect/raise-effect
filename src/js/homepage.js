@@ -149,13 +149,13 @@ let HomePage = React.createClass({
       //Until the weight becomes correct, the following provides us a reasonably close approximation.
       //TODO: REMOVE THE FOLLOWING LINE
       let totalWeight = _.sum(countyWeights, (weight) => _.some(familyCodes, (code) => weight.familycode === code) ? weight.weight : 0);
-      var a = Math.ceil(_(familyCodes).map( (code) => {
+      var a = Math.round(_(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
         var weight = _.find(countyWeights, (weight) => weight.familycode === code);
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.ceil(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight / totalWeight) || 1) : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight / totalWeight) || 1) : 0;
       }).sum() * 100)
 
       return a;
@@ -164,13 +164,13 @@ let HomePage = React.createClass({
       //Until the weight becomes correct, the following provides us a reasonably close approximation.
       //TODO: REMOVE THE FOLLOWING LINE
       let totalWeight = _.sum(countyWeights, (weight) => _.some(familyCodes, (code) => weight.familycode === code) ? weight.weight : 0);
-      var a = Math.ceil(wage / _(familyCodes).map( (code) => {
+      var a = Math.round(wage / _(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
         var weight = _.find(countyWeights, (weight) => weight.familycode === code);
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.ceil(annual.annual) * (weight && (weight.weight / totalWeight) || 1);
+        return Math.round(annual.annual) * (weight && (weight.weight / totalWeight) || 1);
       }).sum() * 100)
       if (a == Infinity) return 0;
       return a;
@@ -180,9 +180,9 @@ let HomePage = React.createClass({
             <div className="col-xs-12">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="jumbotron">
-                            <h1 className="page-header">Raise Effect</h1>
-                            <p className="lead">The Oregon minimum wage is currently <a href="#">$9.25</a>. Is that enough? We’ve looked at different types of families in the state of Oregon to see if the current minimum wage supports <a href="#">self-sufficiency</a>.</p>
+                        <div className="text-center">
+
+                            <h4>The Oregon minimum wage is currently <a href="#">$9.25</a>. Is that enough? We’ve looked at different types of families in the state of Oregon to see if the current minimum wage supports <a href="#">self-sufficiency</a>.</h4>
                         </div>
                     </div>
                 </div>

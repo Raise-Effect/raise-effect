@@ -1,3 +1,32 @@
 .navbar {
     border-radius: 0;
+    min-height: 100px;
+}
+
+.navbar-raise {
+  background-color: #484848;
+
+}
+
+.navbar-raise .navbar-brand {
+  line-height:100px;
+  font-size: 60px;
+  padding-top:5px;
+}
+
+.navbar-raise .navbar-text {
+  line-height:90px;
+  font-family: "ChunkFiveRegular", Helvetica, sans­serif;
+  font-size:60px;
+  color: #D6D6D6;
+  margin-left:0px;
+  margin-top:25px;
+}
+.navbar-brand img {
+  height: 85px
+}
+
+.navbar-nav > li > a {
+  line-height:100px;
+  font-size:24px;
 }

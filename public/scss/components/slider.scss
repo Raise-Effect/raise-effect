@@ -19,7 +19,17 @@
         content: '$'
     }
 }
+.rc-slider-track {
+  background-color:#7cd1c5;
+}
 
+.rc-slider-handle {
+    border-color: #7cd1c5;
+}
+
+.rc-slider-handle:hover {
+    border-color: #25b29e;
+}
 .rc-slider-tooltip-placement-points-bc-tc .rc-slider-tooltip-arrow {
     border-top-color: #000;
 }

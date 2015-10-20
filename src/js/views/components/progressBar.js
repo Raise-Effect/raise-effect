@@ -15,7 +15,7 @@ let ProgressBar = React.createClass({
     if (completed > 100) {completed = 100};
 		return (
             <div className="progress">
-                <div className="progress-bar" role="progressbar" aria-valuenow={this.props.completed} style={{width:this.props.completed + "%"}} aria-valuemin="0" aria-valuemax="100">
+                <div className="progress-bar sufficient" role="progressbar" aria-valuenow={this.props.completed} style={{width:this.props.completed + "%"}} aria-valuemin="0" aria-valuemax="100">
                     <span className="percentage">{this.props.completed}</span>%
                 </div>
             </div>

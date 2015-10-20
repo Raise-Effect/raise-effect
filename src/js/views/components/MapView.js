@@ -14,7 +14,7 @@ let MapView = React.createClass({
         map.scrollWheelZoom.disable();
 
 
-      
+
 
         let geoLayer = L.geoJson(Counties, {
           style: _.bind(this.styleLayer, this),
@@ -74,19 +74,19 @@ let MapView = React.createClass({
 
         switch (true) {
             case (medianIncome >= 55000):
-                return '#08519c';
+                return '#13594f';
             case (medianIncome >= 50000):
-                return '#3182bd';
+                return '#1c8677';
             case (medianIncome >= 45000):
-                return '#6baed6';
+                return '#25b29e';
             case (medianIncome >= 40000):
-                return '#9ecae1';
+                return '#7cd1c5';
             case (medianIncome >= 35000):
-                return '#c6dbef';
+                return '#a8e0d8';
             case (medianIncome < 35000):
-                return '#eff3ff';
+                return '#b8f0e8';
             default:
-                return '#eff3ff';
+                return '#b8f0e8';
         }
     },
 

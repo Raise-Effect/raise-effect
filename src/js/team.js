@@ -7,7 +7,7 @@ let Team = React.createClass({
 
   render: function() {
     return (
-      <div className="col-md-12">
+      <div className="team col-md-12">
         <h1>Raise Effect Team</h1>
 
         <div className="row">

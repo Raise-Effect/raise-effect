@@ -11,8 +11,8 @@ let Breakdown = React.createClass({
           </div>
 
           <div className="col-xs-10">
-              <h3 className="row text-left"><div className="col-xs-6"> {this.props.name}</div><div className="col-xs-6"> <span className="label label-primary pull-right">{this.props.makeupPercentage}% of the Population</span></div></h3>
-              <ProgressBar completed={this.props.percentage} />
+              <h3 className="row text-left"><div className="col-xs-6"> {this.props.name}</div></h3>
+              <ProgressBar completed={this.props.percentage} text={this.props.households + " households"} />
           </div>
       </div>
 		);

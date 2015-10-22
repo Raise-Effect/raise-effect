@@ -40,24 +40,7 @@ let MapView = React.createClass({
         this.map = map;
     },
 
-    componentWillUpdate: function(data) {
-        let fips   = data.selectedCounty.toString();
-        let layers = this.geoLayer.getLayers();
-        let that   = this;
 
-        _.forEach(layers, function(layer) {
-            that.styleLayer(layer);
-            that.resetLayer(layer);
-
-            if (fips === "41") return that.focusOnMap();
-
-            if (layer.feature.properties.fips === fips) {
-                that.focusOnLayer(layer);
-            } else {
-                that.hideLayer(layer);
-            }
-        });
-    },
 
     setupFeature: function(feature, layer) {
         layer.on({
@@ -68,6 +51,7 @@ let MapView = React.createClass({
     },
 
     styleLayer: function(layer) {
+        let sufficiency = this.props.sufficiency;
         return {
             stroke: true,
             weight: 2,
@@ -76,31 +60,25 @@ let MapView = React.createClass({
             dashArray: '3',
             fill: true,
             fillOpacity: 0.7,
-            fillColor: this.fillColor(layer)
+            fillColor: this.fillColor(layer, sufficiency)
         };
     },
 
-    fillColor: function(layer) {
+    fillColor: function(layer, sufficiency) {
         // let id = layer.properties.name.split(' County')[0];
         // let medianIncome = SampleData[id]["median household income"];
-
-        let medianIncome = Math.random() * (60000 - 35000) + 35000;
-
+        let percent = 0;
+        layer = layer.feature || layer;
+        if (sufficiency && sufficiency[layer.properties.fips]) {
+          percent = sufficiency[layer.properties.fips].totalPercent;
+        }
         switch (true) {
-            case (medianIncome >= 55000):
+            case (percent > 90):
                 return '#13594f';
-            case (medianIncome >= 50000):
-                return '#1c8677';
-            case (medianIncome >= 45000):
+            case (percent >= 60):
                 return '#25b29e';
-            case (medianIncome >= 40000):
-                return '#7cd1c5';
-            case (medianIncome >= 35000):
-                return '#a8e0d8';
-            case (medianIncome < 35000):
-                return '#b8f0e8';
             default:
-                return '#b8f0e8';
+                return '#a8e0d8';
         }
     },
 
@@ -147,6 +125,30 @@ let MapView = React.createClass({
     },
 
     render: function() {
+      if (this.geoLayer) {
+      let fips = this.props.selectedCounty;
+      let layers = this.geoLayer.getLayers();
+      let that   = this;
+
+      _.forEach(layers, function(layer) {
+
+        that.resetLayer(layer);
+
+      });
+      if (fips === "41")
+      {
+        that.focusOnMap();
+      }
+      else {
+      _.forEach(layers, function(layer) {
+          if (layer.feature.properties.fips == fips) {
+              that.focusOnLayer(layer);
+          } else {
+              that.hideLayer(layer);
+          }
+      });
+    }
+    }
         return (
             <div className="leaflet-container leaflet-retina leaflet-fade-anim"></div>
         )

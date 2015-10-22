@@ -58,7 +58,6 @@ let HomePage = React.createClass({
             barGroups: [
               {groupedFamilyCodes: singleAdultTypes, populationKey: 'singleAdult', name: 'Single Adult'},
               {groupedFamilyCodes: singleParentFamilyTypes, populationKey: 'singleParent', name: 'One Adult Two Children'},
-              {groupedFamilyCodes: singleAdultTypes, populationKey: 'median', name: 'Median'},
               {groupedFamilyCodes: marriedParentFamilyTypes, populationKey: 'marriedFamily', name: 'Two Adults Two Children'},
             ]
         }
@@ -74,7 +73,7 @@ let HomePage = React.createClass({
           weight: _.groupBy(weightData[0].data, 'fips'),
           wageStats: _.groupBy(wageData[0].data, 'fips'),
           ssswages: _.groupBy(this.getOregonWages(sssData[0].data), 'fips'),
-          population: _.groupBy(this.getOregonMedian(popData[0].data), 'fips')
+          population: _.groupBy(popData[0].data, 'fips')
         });
       })
     },
@@ -88,13 +87,6 @@ let HomePage = React.createClass({
       }).value()
 
       return data.concat(oregonFipsData);
-    },
-    getOregonMedian: function(data) {
-      var oregonMedian = {
-                          fips: '41',
-                          mostCommonFamilyType: 'a1i1p1s0t0'
-                         }
-      return data.concat(oregonMedian);
     },
     handleSliderWageChange: function(value) {
       this.setState({
@@ -110,16 +102,45 @@ let HomePage = React.createClass({
       if (!this.state.census[this.state.selectedCounty.fips]) return;
 
       var {
-        totalHouseHolds,
-        totalMarriedParents,
-        totalSingleAdults,
-        totalSingleParents
+        lowIncomeSingleAdults,
+        lowIncomeSingleParents,
+        lowIncomeMarriedParents
       } = this.state.census[this.state.selectedCounty.fips];
+      var totalHouseHolds = lowIncomeMarriedParents + lowIncomeSingleParents + lowIncomeSingleAdults;
       return {
-        singleAdult: Math.ceil( (totalSingleAdults/totalHouseHolds) * 100 ),
-        singleParent: Math.ceil( (totalSingleParents/totalHouseHolds) * 100 ),
-        marriedFamily: Math.ceil( (totalMarriedParents/totalHouseHolds) * 100 ),
+        singleAdult: Math.ceil( (lowIncomeSingleAdults/totalHouseHolds) * 100 ),
+        singleParent: Math.ceil( (lowIncomeSingleParents/totalHouseHolds) * 100 ),
+        marriedFamily: Math.ceil( (lowIncomeMarriedParents/totalHouseHolds) * 100 ),
       }
+    },
+    getMapSufficiencyPercents: function() {
+      if (!this.state.census[41]) return;
+      var selectedAnnualWage = this.state.sliderWage * 8 * 5 * 4 * 12;
+      var set = _(this.state.weight).map((weight, key) => {
+        var {
+          lowIncomeSingleAdults,
+          lowIncomeSingleParents,
+          lowIncomeMarriedParents
+        } = this.state.census[key];
+        var countyWages = this.state.ssswages[key];
+        var countyWeights = this.state.weight[key];
+        var totalHouseHolds = lowIncomeSingleAdults + lowIncomeSingleParents + lowIncomeMarriedParents;
+        var singleAdult = this.getAggregate(selectedAnnualWage, this.state.groups[0].groupedFamilyCodes, countyWages, countyWeights,lowIncomeSingleAdults);
+        var singleParent = this.getAggregate(selectedAnnualWage, this.state.groups[1].groupedFamilyCodes, countyWages, countyWeights, lowIncomeSingleParents);
+        var marriedFamily = this.getAggregate(selectedAnnualWage * 2, this.state.groups[2].groupedFamilyCodes, countyWages, countyWeights, lowIncomeMarriedParents);
+
+        return {
+          fips: key,
+          singleAdult: singleAdult,
+          singleAdultPercent: Math.round(singleAdult/lowIncomeSingleAdults * 100),
+          singleParent: singleParent,
+          singleParentPercent: Math.round(singleParent/lowIncomeSingleParents * 100),
+          marriedFamily: marriedFamily,
+          marriedFamilyPercent: Math.round(marriedFamily/lowIncomeMarriedParents * 100),
+          totalPercent: Math.round((singleAdult + singleParent + marriedFamily) / totalHouseHolds * 100)
+        };
+      });
+      return _.indexBy(set.value(), 'fips');
     },
     getSufficiencyPercents: function() {
       var selectedAnnualWage = this.state.sliderWage * 8 * 5 * 4 * 12;
@@ -135,42 +156,47 @@ let HomePage = React.createClass({
       var selectedAnnualWage = this.state.sliderWage * 8 * 5 * 4 * 12;
       var countyWages = this.state.ssswages[this.state.selectedCounty.fips];
       var countyWeights = this.state.weight[this.state.selectedCounty.fips];
-      var median = this.state.population[this.state.selectedCounty.fips];
-      let medianFamilyType = median === null ? median.mostCommonFamilyType : "a1i1p1s0t0";
 
       return {
         singleAdult: this.getBarAggregatePercent(selectedAnnualWage, this.state.groups[0].groupedFamilyCodes, countyWages, countyWeights),
         singleParent: this.getBarAggregatePercent(selectedAnnualWage, this.state.groups[1].groupedFamilyCodes, countyWages, countyWeights),
-        median: this.getBarAggregatePercent(selectedAnnualWage, [medianFamilyType], countyWages, countyWeights),
         marriedFamily: this.getBarAggregatePercent(selectedAnnualWage * 2, this.state.groups[2].groupedFamilyCodes, countyWages, countyWeights)
       }
     },
     getAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
-      //Until the weight becomes correct, the following provides us a reasonably close approximation.
-      //TODO: REMOVE THE FOLLOWING LINE
-      let totalWeight = _.sum(countyWeights, (weight) => _.some(familyCodes, (code) => weight.familycode === code) ? weight.weight : 0);
       var a = Math.round(_(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
-        var weight = _.find(countyWeights, (weight) => weight.familycode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight / totalWeight) || 1) : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) : 0;
       }).sum() * 100)
 
       return a;
     },
-    getBarAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
-      //Until the weight becomes correct, the following provides us a reasonably close approximation.
-      //TODO: REMOVE THE FOLLOWING LINE
-      let totalWeight = _.sum(countyWeights, (weight) => _.some(familyCodes, (code) => weight.familycode === code) ? weight.weight : 0);
-      var a = Math.round(wage / _(familyCodes).map( (code) => {
+    getAggregate: function(wage, familyCodes, countyWages, countyWeights, householdNumber) {
+      var a = Math.round(_(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
-        var weight = _.find(countyWeights, (weight) => weight.familycode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(annual.annual) * (weight && (weight.weight / totalWeight) || 1);
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) * householdNumber : 0;
+      }).sum());
+
+      return a;
+    },
+
+    getBarAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
+
+      var a = Math.round(wage / _(familyCodes).map( (code) => {
+        var annual = _.find(countyWages, (wage) => wage.familyCode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
+
+        if (!annual) return 0;
+        //TODO: Remove / totalWeight
+        return Math.round(annual.annual) * (weight && (weight.weight) || 1);
       }).sum() * 100)
       if (a == Infinity) return 0;
       return a;
@@ -224,7 +250,7 @@ let HomePage = React.createClass({
                         </h3>
 
                         <div id="map">
-                          <MapView selectedCounty={this.state.selectedCounty.fips} onMapSelect={this.selectCounty} sliderWage={this.state.sliderWage} wages={this.state.wageStats} />
+                          <MapView selectedCounty={this.state.selectedCounty.fips} onMapSelect={this.selectCounty} sufficiency={this.getMapSufficiencyPercents()} />
                         </div>
                     </div>
 

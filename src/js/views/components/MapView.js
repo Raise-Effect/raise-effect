@@ -14,7 +14,21 @@ let MapView = React.createClass({
         map.scrollWheelZoom.disable();
 
 
+        var legend = L.control({position: 'bottomright'});
 
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend');
+
+                div.innerHtml = '<i class="under"></i>0-60%<br/>';
+                div.innerHtml += '<i class="sufficient"></i>60-90%<br/>';
+                div.innerHtml += '<i class="over"></i>>90%<br/>';
+                div.innerHTML = div.innerHtml;
+
+            return div;
+        };
+
+        legend.addTo(map);
 
         let geoLayer = L.geoJson(Counties, {
           style: _.bind(this.styleLayer, this),

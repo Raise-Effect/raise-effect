@@ -1,7 +1,7 @@
 let teamData = [
   {
     "name": "Nick Bernard",
-    "title": "Develper",
+    "title": "Software Engineer",
     "photoPath": "nickbernard.jpeg"
   },
   {
@@ -11,7 +11,7 @@ let teamData = [
   },
   {
     "name": "Aaron DeVore",
-    "title": "Develper",
+    "title": "Software Engineer",
     "photoPath": "aarondevore.jpeg"
   },
   {

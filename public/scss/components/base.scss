@@ -74,5 +74,8 @@ font-size: 14px;
 }
 
 img {
-  image-orientation: from-image;
+  object-fit: cover;
+  &.member {
+    border-radius: 50%;
+  }
 }

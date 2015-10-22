@@ -26,13 +26,14 @@
     "backbone": "^1.2.1",
     "beefy": "^2.1.5",
     "bootstrap": "^3.3.5",
-    "font-awesome": "^4.4.0",
     "browserify": "^11.0.1",
     "exorcist": "0.4.0",
+    "font-awesome": "^4.4.0",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.5.2",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
+    "imagemin": "^3.2.2",
     "node-sass": "^3.2.0",
     "nodemon": "^1.4.0",
     "watchify": "^3.2.3"
@@ -42,7 +43,8 @@
     "watch": "watchify ./src/index.js -o './node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js' -d -v",
     "build-css": "node-sass ./public/scss/main.scss ./public/css/main.css",
     "watch-css": "nodemon -e scss -x 'npm run build-css'",
-    "serve": "beefy ./src/index.js 3000 --index=./src/index.html --live"
+    "serve": "beefy ./src/index.js 3000 --index=./src/index.html --live",
+    "image-min": "imagemin ./src/images/team/ ./public/images/team/ -o 7"
   },
   "browserify": {
     "transform": [

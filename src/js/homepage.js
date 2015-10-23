@@ -43,7 +43,7 @@ let marriedParentFamilyTypes = [
 let HomePage = React.createClass({
     getInitialState: function() {
         return {
-            sliderWage: 13.50,
+            sliderWage: 9.25,
             selectedCounty: {fips: "41", name: "Oregon"},
             census: {},
             weight: {},

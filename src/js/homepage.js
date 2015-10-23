@@ -186,7 +186,7 @@ let HomePage = React.createClass({
       if (!this.state.census[this.state.selectedCounty.fips]) return;
       var result = this.getOregonAggregation(this.getMapSufficiencyPercents());
       var geo = result[this.state.selectedCounty.fips];
-      var cap = Math.max(geo.singleAdult,geo.singleParent,geo.marriedFamily);
+      var cap = Math.max(geo.lowIncomeSingleAdults,geo.lowIncomeSingleParents,geo.lowIncomeMarriedParents);
       return {
         geoPercent: Math.round((geo.totalLowIncomeHouseholds / geo.totalHouseholds) * 100),
         households: {
@@ -198,7 +198,18 @@ let HomePage = React.createClass({
           singleAdult: Math.round(geo.singleAdult / cap * 100),
           singleParent: Math.round(geo.singleParent / cap * 100),
           marriedFamily: Math.round(geo.marriedFamily / cap * 100)
+        },
+        totalPercents: {
+          singleAdult: Math.round(geo.lowIncomeSingleAdults / cap * 100),
+          singleParent: Math.round(geo.lowIncomeSingleParents / cap * 100),
+          marriedFamily: Math.round(geo.lowIncomeMarriedParents / cap * 100)
+        },
+        sufficiency: {
+          singleAdult: Math.round(geo.singleAdult / geo.lowIncomeSingleAdults * 100),
+          singleParent: Math.round(geo.singleParent / geo.lowIncomeSingleParents * 100),
+          marriedFamily: Math.round(geo.marriedFamily / geo.lowIncomeMarriedParents * 100)
         }
+
       }
     },
     getBarSufficiencyPercents: function() {
@@ -273,21 +284,15 @@ let HomePage = React.createClass({
                         </div>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="col-md-6 component map">
-                        <div id="impact">
-                        </div>
-                        <h2>Impact</h2>
-
-                        <div id="impactProgress">
-                          <ProgressBar completed={47}/>
-                        </div>
-
-                        <h3><span className="impact-percentage">50</span>% meet or exceed self-sufficiency in
+                    <h2>What’s the Regional Impact?</h2>
+                    <small>Understanding that some households will meet or exceed self-sufficiency at different rates,
+                    the color of the county relates to an average of all low income family types (link) in a county. </small>
+                        <h3>
                             <div className="btn-group">
                               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {this.state.selectedCounty.name} <i className="fa fa-angle-down"></i>
+                                {this.state.selectedCounty.name} <span className="caret"></span>
                               </button>
                               <ul className="dropdown-menu">
                                 { _.map(counties, (county) => {

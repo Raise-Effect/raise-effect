@@ -27,8 +27,8 @@
     "beefy": "^2.1.5",
     "bootstrap": "^3.3.5",
     "browserify": "^11.0.1",
+    "minifyify": "^7.1.0",
     "exorcist": "0.4.0",
-    "font-awesome": "^4.4.0",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.5.2",
     "handlebars": "^3.0.3",
@@ -39,7 +39,7 @@
     "watchify": "^3.2.3"
   },
   "scripts": {
-    "build": "browserify ./src/index.js -d | ./node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js",
+    "build": "browserify ./src/index.js -d -p [minifyify --no-map] > public/js/oregon_minwage.js",
     "watch": "watchify ./src/index.js -o './node_modules/.bin/exorcist public/js/oregon_minwage.js.map > public/js/oregon_minwage.js' -d -v",
     "build-css": "node-sass ./public/scss/main.scss ./public/css/main.css",
     "watch-css": "nodemon -e scss -x 'npm run build-css'",

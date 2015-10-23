@@ -1,18 +1,45 @@
 import React from 'react';
-import ProgressBar from '../components/progressBar';
+import classNames from "classnames";
 
 
 let Breakdown = React.createClass({
 	render() {
+		let color = classNames("progress-bar", "under");
+		if (this.props.sufficiency >= 90)
+		{
+			color = classNames("progress-bar", "over");
+		}
+		else if (this.props.sufficiency >= 50) {
+			color = classNames("progress-bar", "sufficient");
+		}
+		let img = "/public/images/family-single-adult.png";
+		if (this.props.populationKey === "singleParent")
+		{
+			img = "/public/images/family-one-parent.png";
+		}
+		else if (this.props.populationKey === "marriedFamily") {
+			img = "/public/images/family-two-parent.png";
+		}
 		return (
       <div className="row">
           <div className="col-xs-2 family-type-icon">
-              <h3><i className="fa fa-4x fa-user"></i></h3>
+              <h3><img src={img} style={{height:'64px'}}/></h3>
           </div>
 
           <div className="col-xs-10">
               <h3 className="row text-left"><div className="col-xs-6"> {this.props.name}</div></h3>
-              <ProgressBar completed={this.props.percentage} text={this.props.households + " households"} />
+							<div className="total-divider-container">
+								<div className="total-divider" style={{width: this.props.totalPercent + '%'}}/>
+								<div className="total-annotation-container" style={{left: this.props.totalPercent + '%'}}>
+									<div className="total-annotation"><em>Total Households</em></div>
+								</div>
+							</div>
+							<div className="progress">
+									<div className={color} role="progressbar" aria-valuenow={this.props.percentage} style={{width:this.props.percentage + "%"}} aria-valuemin="0" aria-valuemax="100">
+											<span className="percentage">{this.props.households + " households"}</span>
+									</div>
+							</div>
+
           </div>
       </div>
 		);

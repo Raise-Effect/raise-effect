@@ -19,10 +19,10 @@ let MapView = React.createClass({
         legend.onAdd = function (map) {
 
             var div = L.DomUtil.create('div', 'info legend');
-
-                div.innerHtml = '<i class="under"></i>0-60%<br/>';
-                div.innerHtml += '<i class="sufficient"></i>60-90%<br/>';
-                div.innerHtml += '<i class="over"></i>>90%<br/>';
+                div.innerHtml =  '<u>Sufficient Households</u><br/>';
+                div.innerHtml += '<i class="under"></i>less than half<br/>';
+                div.innerHtml += '<i class="sufficient"></i>more than half<br/>';
+                div.innerHtml += '<i class="over"></i>almost all<br/>';
                 div.innerHTML = div.innerHtml;
 
             return div;
@@ -74,9 +74,9 @@ let MapView = React.createClass({
         }
         switch (true) {
             case (percent > 90):
-                return '#13594f';
+                return '#ffc928';
             case (percent >= 60):
-                return '#25b29e';
+                return '#1c8677';
             default:
                 return '#a8e0d8';
         }

@@ -2,6 +2,7 @@ import React from "react";
 import SliderBox from './views/components/sliderBox';
 import Households from './views/components/households';
 import ProgressBar from './views/components/progressBar';
+import FamilyLife from './views/components/familyLife';
 import SufficiencyBarChart from './views/components/sufficiencyBarChart';
 import MapView from './views/components/MapView';
 import counties from './../fixtures/counties';
@@ -76,6 +77,17 @@ let HomePage = React.createClass({
           population: _.groupBy(popData[0].data, 'fips')
         });
       })
+    },
+    getBudgetData: function() {
+      return [
+        {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842},
+        {name: "Food", singleParent: 608, singleAdult: 250, marriedFamily: 841},
+        {name: "Childcare", singleParent: 906, singleAdult: 0, marriedFamily: 944},
+        {name: "Healthcare", singleParent: 425, singleAdult: 127, marriedFamily: 480},
+        {name: "Transportation", singleParent: 231, singleAdult: 225, marriedFamily: 442},
+        {name: "Taxes", singleParent: 691, singleAdult: 332, marriedFamily: 767},
+        {name: "Misc", singleParent: 301, singleAdult: 127, marriedFamily: 352}
+      ];
     },
     getOregonWages: function(data) {
       var oregonFipsData = _(data).groupBy('familyCode').map((codeData, key) => {
@@ -315,9 +327,14 @@ let HomePage = React.createClass({
                       />
                     </div>
                 </div>
-                <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}
-                                     groups={this.state.barGroups}
-                                     />
+                <div className="row">
+                  <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}
+                                       groups={this.state.barGroups}
+                                       />
+                </div>
+                <div className="row">
+                  <FamilyLife data={this.getBudgetData()}/>
+                </div>
             </div>
         )
     }

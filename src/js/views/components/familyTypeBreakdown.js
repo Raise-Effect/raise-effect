@@ -3,6 +3,11 @@ import classNames from "classnames";
 
 
 let Breakdown = React.createClass({
+	numberWithCommas: function(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+	},
 	render() {
 		let color = classNames("progress-bar", "under");
 		if (this.props.sufficiency >= 90)
@@ -23,7 +28,7 @@ let Breakdown = React.createClass({
 		return (
       <div className="row">
           <div className="col-xs-2 family-type-icon">
-              <h3><img src={img} style={{height:'64px'}}/></h3>
+              <h3><img className="icon-height" alt={this.props.name} src={img}/></h3>
           </div>
 
           <div className="col-xs-10">
@@ -36,7 +41,7 @@ let Breakdown = React.createClass({
 							</div>
 							<div className="progress">
 									<div className={color} role="progressbar" aria-valuenow={this.props.percentage} style={{width:this.props.percentage + "%"}} aria-valuemin="0" aria-valuemax="100">
-											<span className="percentage">{this.props.households + " households"}</span>
+											<span className="percentage">{this.numberWithCommas(this.props.households) + " households"}</span>
 									</div>
 							</div>
 

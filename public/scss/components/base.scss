@@ -28,6 +28,10 @@ small {
       color: #777;
 }
 
+.icon-height {
+  height:64px;
+}
+
 .under {
   background-color: #a8e0d8;
   color: black;
@@ -35,6 +39,15 @@ small {
 
 .sufficient {
   background-color: #1c8677;
+}
+.jumbotron {
+  background-color: #c1c1c1;
+  padding-top:15px;
+  margin-top:20px;
+  h1 {
+    font-size:45px;
+    font-­family: "Roboto Condensed", Helvetica, sans­serif;
+  }
 }
 
 .over {
@@ -50,7 +63,6 @@ color: #393434;
 
 h1, h2, h3 {
 font-­family: "Roboto Condensed", Helvetica, sans­serif;
-font-size: 50px;
 font-weight: 700;
 }
 

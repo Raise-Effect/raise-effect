@@ -14,7 +14,7 @@
 }
 
 .label-primary {
-  background-color: #7cd1c5
+  background-color: #7cd1c5;
 }
 
 .dropdown-menu > li > a {
@@ -40,6 +40,7 @@ small {
 .sufficient {
   background-color: #1c8677;
 }
+
 .jumbotron {
   background-color: #c1c1c1;
   padding-top:15px;
@@ -114,6 +115,10 @@ font-size: 14px;
 a {
   color: $teal3;
   font-weight: bold;
+}
+
+.col-md-12 .text-center {
+  margin: 5% 0;
 }
 
 

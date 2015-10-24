@@ -281,8 +281,13 @@ let HomePage = React.createClass({
                 <div className="row">
                     <div className="col-md-12">
                         <div className="text-center">
-
-                            <h4>The Oregon minimum wage is currently <a href="#">$9.25</a>. Is that enough? We’ve looked at three types of families in the state of Oregon to see if the current minimum wage supports <a href="#">self-sufficiency</a>.</h4>
+                            <h2>The Oregon minimum wage is currently <a href="#">$9.25</a>. 
+                            Is that enough? We’ve looked at three types of families in the state of Oregon 
+                            to see if the current minimum wage supports self-sufficiency.</h2>
+                        </div>
+                        <div className="text-center">
+                            <h2><a href="#">Self-sufficiency</a> measures how much income a household in a given location
+                            needs to adequately meet their basic needs - without public or private assistance.</h2>
                         </div>
                     </div>
                 </div>
@@ -291,6 +296,7 @@ let HomePage = React.createClass({
                 <div className="row">
                     <div className="col-md-12 component wage-slider">
                         <h1>Would you raise the minimum wage?</h1>
+                        <h2>Drag the slider to see the impact raising the minimum wage would have.</h2>
                         <div id="slider">
                           <SliderBox
                             value={this.state.sliderWage}

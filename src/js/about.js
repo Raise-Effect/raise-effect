@@ -4,7 +4,7 @@ let About = React.createClass({
 
   render: function() {
     return (
-      <div>About</div>
+      <div>The Study</div>
     )
   }
 })

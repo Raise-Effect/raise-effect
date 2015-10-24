@@ -3,7 +3,6 @@ import {findDOMNode} from "react-dom";
 import _ from "lodash";
 import d3 from "d3";
 import nv from "nvd3";
-// import SufficiencyBarLine from "../components/sufficiencyBarLine"
 
 let SufficiencyBarChart = React.createClass({
   getDefaultProps: function() {

@@ -1,17 +1,22 @@
 #slider {
-    width: 80%;
+    width: 60%;
     margin: 40px auto;
     .slider {
         margin-bottom: 2em;
     }
 }
 
+.rc-slider {
+    height: 8px;
+    background-color: $grey2;
+    vertical-align: middle;
+}
+
 .rc-slider-tooltip-inner {
     width: auto;
     height: auto;
-    padding: 6px;
-    font-size: 11px;
-    background-color: #000;
+    padding: 10px;
+    font-size: 16px;
     border-radius: 2px;
     box-shadow: none;
     vertical-align: middle;
@@ -20,11 +25,15 @@
     }
 }
 .rc-slider-track {
-  background-color:#7cd1c5;
+    background-color: $teal3;
+    height: 8px;
 }
 
 .rc-slider-handle {
-    border-color: #7cd1c5;
+    border-color: $teal3;
+    background-color: $teal3;
+    width: 20px;
+    height: 20px;
 }
 
 .rc-slider-handle:hover {

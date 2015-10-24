@@ -1,13 +1,12 @@
 .color-box {
-  margin-top:20px;
-  margin-bottom:10px;
-  margin-left: 20%;
-  margin-right: 20%;
-  -webkit-box-shadow: 3px 8px 21px -1px rgba(0,0,0,0.22);
-  -moz-box-shadow: 3px 8px 21px -1px rgba(0,0,0,0.22);
-  box-shadow: 3px 8px 21px -1px rgba(0,0,0,0.22);
+  margin: 5% 10%;
+  padding: 5%;
+  background-color: $grey1;
+
+  font-size: 18px;
+  color: black;
+
   -webkit-border-radius: 5;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  color: white;
 }

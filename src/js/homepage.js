@@ -247,15 +247,13 @@ let HomePage = React.createClass({
 
       }
     },
-    getBarSufficiencyPercents: function() {
+    getBarSufficiencyData: function() {
       var selectedAnnualWage = this.state.sliderWage * 8 * 22 * 12;
-      var countyWages = this.state.ssswages[this.state.selectedCounty.fips];
-      var countyWeights = this.state.weight[this.state.selectedCounty.fips];
 
       return {
-        singleAdult: this.getBarAggregatePercent(selectedAnnualWage, this.state.groups[0].groupedFamilyCodes, countyWages, countyWeights),
-        singleParent: this.getBarAggregatePercent(selectedAnnualWage, this.state.groups[1].groupedFamilyCodes, countyWages, countyWeights),
-        marriedFamily: this.getBarAggregatePercent(selectedAnnualWage * 2, this.state.groups[2].groupedFamilyCodes, countyWages, countyWeights)
+        singleAdult: selectedAnnualWage,
+        singleParent: selectedAnnualWage,
+        marriedFamily: selectedAnnualWage * 2
       }
     },
     getAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
@@ -394,7 +392,7 @@ let HomePage = React.createClass({
                 </div>
 
                 <div className="row">
-                  <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}
+                  <SufficiencyBarChart income={this.getBarSufficiencyData()}
                                        groups={this.state.barGroups}
                                        />
                 </div>

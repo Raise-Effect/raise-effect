@@ -3,11 +3,11 @@ import {findDOMNode} from "react-dom";
 import _ from "lodash";
 import d3 from "d3";
 import nv from "nvd3";
-import SufficiencyBarLine from "../components/sufficiencyBarLine"
+// import SufficiencyBarLine from "../components/sufficiencyBarLine"
 
 let SufficiencyBarChart = React.createClass({
   getDefaultProps: function() {
-    return { sufficiency: {}, groups: [] };
+    return { income: {}, groups: [] };
   },
 
   getHeaders: function() {
@@ -20,27 +20,67 @@ let SufficiencyBarChart = React.createClass({
     });
   },
 
-  getBars: function() {
-    return _.map(this.props.groups, (group) => {
-      return (
-        <SufficiencyBarLine
-          key={group.populationKey}
-          familyType={group.populationKey}
-          percentage={this.props.sufficiency[group.populationKey]}
-        />
-      )
+  getChartData: function() {
+    let data   = [],
+        income = this.props.income;
+
+    _.map(this.props.groups, (group) => {
+      let groupData = {
+        "title": group.name,
+        "measures": [income[group.populationKey]],
+        "measureLabels": ['Annual Income'],
+        "ranges":[10000, 25000, 50000],
+        "rangeLabels":['Federal Poverty Line', 'Federal Poverty Line', 'Federal Poverty Line']
+      };
+
+      data.push(groupData);
     });
+
+    return data;
+  },
+
+  refreshChart: function() {
+    var chartData = this.getChartData();
+    // this.chart.datum(chartData);
+  },
+
+  renderChart: function() {
+    var bulletChart = nv.models.bulletChart(),
+        chartData   = this.getChartData();
+
+    var width = 960,
+        height = 80,
+        margin = {top: 5, right: 40, bottom: 20, left: 120};
+
+    var chart = d3.select(".chart").selectAll("svg")
+      .data(chartData)
+      .enter().append('svg')
+      .attr("width",width)
+      .attr("height",height)
+      .attr('class',"bullet nvd3")
+      .transition().duration(1000)
+      .call(bulletChart);
+
+    this.chart = chart;
   },
 
   render: function() {
     return (
       <div className="row horizontal rounded">
         <div className="col-xs-12">
-            {this.getBars()}
+            <div className="chart"></div>
         </div>
      </div>
     );
-	}
+	},
+
+  componentDidMount: function() {
+    this.renderChart();
+  },
+
+  componentDidUpdate: function() {
+    // this.refreshChart();
+  }
 });
 
 export default SufficiencyBarChart;

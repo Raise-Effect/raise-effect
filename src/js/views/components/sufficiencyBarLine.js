@@ -1,45 +1,44 @@
-import React from "react";
-import {findDOMNode} from "react-dom";
-import classNames from "classnames";
+// import React from "react";
+// import {findDOMNode} from "react-dom";
+// import classNames from "classnames";
 
-let SufficiencyBarLine = React.createClass({
-  propTypes: {
+// let SufficiencyBarLine = React.createClass({
+//   propTypes: {
 
-  },
+//   },
 
-  getDefaultProps: function() {
-    return { percentage: 0};
-  },
+//   getDefaultProps: function() {
+//     return { income: 0};
+//   },
 
-  render: function() {
-    return (
-      <div className={this.props.familyType + "-chart"}></div>
-    )
-  },
+//   renderChart: function() {
+//     let chart = nv.models.bulletChart();
 
-  componentDidMount: function() {
-    let chart = nv.models.bulletChart();
+//     let data = [{
+//       "title": this.props.group.name,
+//       "measures":[this.props.income],
+//       "measureLabels":['Annual Income'],
+//       "ranges":[10000, 25000, 50000],
+//       "rangeLabels":['Federal Poverty Line', 'Federal Poverty Line', 'Federal Poverty Line'],
+//       // "markers":[250, 100],
+//       // "markerLabels":['Target Inventory', 'Low Inventory'],
+//     }];
 
-    let dataWithLabels = [{
-      "title":"Revenue",
-      "subtitle":"US$, in thousands",
-      "ranges":[150,225,300],
-      "measures":[220],
-      "markers":[250, 100],
-      "markerLabels":['Target Inventory', 'Low Inventory'],
-      "rangeLabels":['Maximum Inventory','Average Inventory','Minimum Inventory'],
-      "measureLabels":['Current Inventory']
-    }];
+//     let chartName = "." + this.props.group.populationKey + "-chart";
 
-    let chartName = "." + this.props.familyType + "-chart";
+//     d3.select(chartName).selectAll("svg")
+//       .data(data)
+//       .enter().append('svg')
+//       .attr('class',"bullet nvd3")
+//       .transition().duration(1000)
+//       .call(chart);
+//   },
 
-    let vis2 = d3.select(chartName).selectAll("svg")
-      .data(dataWithLabels)
-      .enter().append('svg')
-      .attr('class',"bullet nvd3")
-      .transition().duration(1000)
-      .call(chart);
-  }
-});
+//   render: function() {
+//     return (
+//       <div className={this.props.group.populationKey + "-chart"}></div>
+//     )
+//   }
+// });
 
-export default SufficiencyBarLine;
+// export default SufficiencyBarLine;

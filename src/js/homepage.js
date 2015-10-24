@@ -1,4 +1,5 @@
 import React from "react";
+import StickyDiv from "react-stickydiv";
 import SliderBox from './views/components/sliderBox';
 import Households from './views/components/households';
 import ProgressBar from './views/components/progressBar';
@@ -273,6 +274,7 @@ let HomePage = React.createClass({
       if (a == Infinity) return 0;
       return a;
     },
+
     render: function() {
         return (
             <div className="col-xs-12">
@@ -285,6 +287,7 @@ let HomePage = React.createClass({
                     </div>
                 </div>
 
+              <StickyDiv>
                 <div className="row">
                     <div className="col-md-12 component wage-slider">
                         <h1>Would you raise the minimum wage?</h1>
@@ -296,6 +299,8 @@ let HomePage = React.createClass({
                         </div>
                     </div>
                 </div>
+              </StickyDiv>
+
                 <div className="row">
                     <div className="col-md-6 component map">
                     <h2>What’s the Regional Impact?</h2>

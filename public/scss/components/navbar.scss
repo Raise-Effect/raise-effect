@@ -4,29 +4,29 @@
 }
 
 .navbar-raise {
-  background-color: #484848;
-
+  background-color: #505050;
 }
 
 .navbar-raise .navbar-brand {
-  line-height:100px;
+  line-height: 100px;
   font-size: 60px;
-  padding-top:5px;
+  padding-top: 5px;
 }
 
 .navbar-raise .navbar-text {
-  line-height:90px;
+  line-height: 90px;
   font-family: "ChunkFiveRegular", Helvetica, sans­serif;
-  font-size:60px;
-  color: #D6D6D6;
-  margin-left:0px;
-  margin-top:25px;
+  font-size: 50px;
+  color: $grey1;
+  margin-left: 0px;
+  margin-top: 25px;
 }
+
 .navbar-brand img {
-  height: 85px
+  height: 50px
 }
 
 .navbar-nav > li > a {
-  line-height:100px;
-  font-size:24px;
+  line-height: 100px;
+  font-size: 20px;
 }

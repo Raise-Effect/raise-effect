@@ -28,15 +28,16 @@
     "beefy": "^2.1.5",
     "bootstrap": "^3.3.5",
     "browserify": "^11.0.1",
-    "minifyify": "^7.1.0",
     "exorcist": "0.4.0",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.5.2",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
     "imagemin": "^3.2.2",
+    "minifyify": "^7.1.0",
     "node-sass": "^3.2.0",
     "nodemon": "^1.4.0",
+    "nvd3": "^1.8.1",
     "watchify": "^3.2.3"
   },
   "scripts": {

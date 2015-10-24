@@ -40,27 +40,26 @@ let SufficiencyBarChart = React.createClass({
 
   refreshChart: function() {
     var chartData = this.getChartData();
-    // this.chart.datum(chartData);
+
+    d3.select(".chart").selectAll("svg")
+      .data(chartData)
+      .transition()
+      .duration(1000)
+      .call(this.chartType);
   },
 
   renderChart: function() {
     var bulletChart = nv.models.bulletChart(),
         chartData   = this.getChartData();
 
-    var width = 960,
-        height = 80,
-        margin = {top: 5, right: 40, bottom: 20, left: 120};
-
     var chart = d3.select(".chart").selectAll("svg")
       .data(chartData)
       .enter().append('svg')
-      .attr("width",width)
-      .attr("height",height)
       .attr('class',"bullet nvd3")
       .transition().duration(1000)
       .call(bulletChart);
 
-    this.chart = chart;
+    this.chartType = bulletChart;
   },
 
   render: function() {
@@ -77,8 +76,8 @@ let SufficiencyBarChart = React.createClass({
     this.renderChart();
   },
 
-  componentDidUpdate: function() {
-    // this.refreshChart();
+  componentWillUpdate: function() {
+    this.refreshChart();
   }
 });
 

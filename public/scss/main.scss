@@ -1,15 +1,26 @@
-// imports css files here..
+// CSS files imports
 
 @import "../../node_modules/rc-slider/assets/index";
 
+// base/
+// -- leaflet
+// -- bootstrap.css
 @import "base/base";
 
+// helpers
 @import "components/variables";
+@import "components/typography";
+
+// components/base
 @import "components/base";
+
+// components/
 @import "components/navbar";
 @import "components/slider";
 @import "components/map";
 @import "components/bargraph";
-@import "components/team";
 @import "components/households";
 @import "components/familyLife";
+
+// pages/
+@import "components/team";

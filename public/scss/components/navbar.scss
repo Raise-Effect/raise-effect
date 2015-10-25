@@ -4,7 +4,7 @@
 }
 
 .navbar-raise {
-  background-color: #505050;
+  background-color: $bg-header-footer;
 }
 
 .navbar-raise .navbar-brand {
@@ -16,7 +16,7 @@
 .navbar-raise .navbar-text {
   line-height: 90px;
   font-family: "ChunkFiveRegular", Helvetica, sans­serif;
-  font-size: 50px;
+  font-size: 2.75em;
   color: $grey1;
   margin-left: 0px;
   margin-top: 25px;

@@ -222,6 +222,7 @@ let HomePage = React.createClass({
       var result = this.getOregonAggregation(this.getMapSufficiencyPercents());
       var geo = result[this.state.selectedCounty.fips];
       var cap = Math.max(geo.lowIncomeSingleAdults,geo.lowIncomeSingleParents,geo.lowIncomeMarriedParents);
+
       return {
         geoPercent: Math.round((geo.totalLowIncomeHouseholds / geo.totalHouseholds) * 100),
         households: {
@@ -247,7 +248,8 @@ let HomePage = React.createClass({
 
       }
     },
-    getBarSufficiencyData: function() {
+
+    getAnnualIncome: function() {
       var selectedAnnualWage = this.state.sliderWage * 8 * 22 * 12;
 
       return {
@@ -256,6 +258,74 @@ let HomePage = React.createClass({
         marriedFamily: selectedAnnualWage * 2
       }
     },
+
+    getBarChartAnnualIncome: function(familyCodes, countyWages, countyWeights) {
+      var a = Math.round(_(familyCodes).map( (code) => {
+        var annual = _.find(countyWages, (wage) => wage.familyCode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
+
+        if (!annual) return 0;
+        //TODO: Remove / totalWeight
+        return Math.round(annual.annual) * (weight && (weight.weight) || 1);
+      }).sum())
+
+      return a;
+    },
+
+    getAnnualSufficiencyWage: function() {
+      var fips          = this.state.selectedCounty.fips,
+          countyWages   = this.state.ssswages[fips],
+          countyWeights = this.state.weight[fips];
+
+      if (fips === "41") {
+        return {
+          singleAdult: Math.round(20815.98732),
+          singleParent: Math.round(48044.57333),
+          marriedFamily: Math.round(55700.75597)
+        }
+      } else {
+        return {
+          singleAdult: this.getBarChartAnnualIncome(singleAdultTypes, countyWages, countyWeights),
+          singleParent: this.getBarChartAnnualIncome(singleParentFamilyTypes, countyWages, countyWeights),
+          marriedFamily: this.getBarChartAnnualIncome(marriedParentFamilyTypes, countyWages, countyWeights)
+        }
+      }
+    },
+
+    getMedianIncome: function() {
+      if (_.isEmpty(this.state.wageStats)) return {};
+      var fips = this.state.selectedCounty.fips;
+
+      return {
+        singleAdult: this.state.wageStats[fips][0].nonFamilyMedianIncome,
+        singleParent: this.state.wageStats[fips][0].familyMedianIncome,
+        marriedFamily: this.state.wageStats[fips][0].marriedMedianIncome
+      }
+    },
+
+    getBarChartIncomeData: function() {
+      var sufficiencyWageData = this.getAnnualSufficiencyWage(),
+          medianIncomeData    = this.getMedianIncome();
+
+      var data = {
+        singleAdult: {
+          povertyLine: 11490,
+          sufficiencyWage: sufficiencyWageData.singleAdult,
+          medianIncome: medianIncomeData.singleAdult
+        },
+        singleParent: {
+          povertyLine: 19530,
+          sufficiencyWage: sufficiencyWageData.singleParent,
+          medianIncome: medianIncomeData.singleParent
+        },
+        marriedFamily: {
+          povertyLine: 23550,
+          sufficiencyWage: sufficiencyWageData.marriedFamily,
+          medianIncome: medianIncomeData.marriedFamily
+        }
+      }
+    },
+
     getAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
       var a = Math.round(_(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
@@ -263,11 +333,12 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) : 0;
       }).sum() * 100)
 
       return a;
     },
+
     getAggregate: function(wage, familyCodes, countyWages, countyWeights, householdNumber) {
       var a = Math.round(_(familyCodes).map( (code) => {
         var annual = _.find(countyWages, (wage) => wage.familyCode === code);
@@ -275,25 +346,12 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) * householdNumber : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) * householdNumber : 0;
       }).sum());
 
       return a;
     },
 
-    getBarAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {
-
-      var a = Math.round(wage / _(familyCodes).map( (code) => {
-        var annual = _.find(countyWages, (wage) => wage.familyCode === code);
-        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
-
-        if (!annual) return 0;
-        //TODO: Remove / totalWeight
-        return Math.round(annual.annual) * ((weight ? weight.weight : 1));
-      }).sum() * 100)
-      if (a == Infinity) return 0;
-      return a;
-    },
     getWeightedBudget: function(familyCodes, countyBudgets, countyWeights) {
       var budgets = _.map(familyCodes,(code) => {
         var budget = _.find(countyBudgets, (wage) => wage.familyCode === code);
@@ -322,8 +380,10 @@ let HomePage = React.createClass({
         result.taxes += budget.taxes;
         result.transportation += budget.transportation;
       });
+
       return result;
     },
+
     render: function() {
         return (
             <div className="col-xs-12">
@@ -392,17 +452,15 @@ let HomePage = React.createClass({
                 </div>
 
                 <div className="row">
-                  <SufficiencyBarChart income={this.getBarSufficiencyData()}
+                  <SufficiencyBarChart income={this.getAnnualIncome()}
+                                       wageData={this.getBarChartIncomeData()}
                                        groups={this.state.barGroups}
-                                       />
+                  />
                 </div>
-
 
                 <div className="row">
                   <FamilyLife selectCounty={this.selectCounty} counties={counties} selectedCounty={this.state.selectedCounty} data={this.getBudgetData()}/>
                 </div>
-
-
 
             </div>
         )

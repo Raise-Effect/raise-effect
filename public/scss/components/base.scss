@@ -1,14 +1,12 @@
-/* Whichever you want to use */
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700|Roboto+Condensed:400,700);
-@font-face {
-  font-family: 'ChunkFiveRegular';
-  src: url('/public/images/Chunkfive.otf');
-  src: url('/public/images/Chunkfive.otf?#iefix') format('otf'),
-  url('/public/images/Chunkfive.otf') format('otf'),
-  url('/public/images/Chunkfive.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+body {
+  background-color: $background-color;
+  color: $text-color;
+// font-size: $base-font-size;
+// font-family: $base-font-family;
+//  font-weight: $base-font-weight;
+  line-height: 1.8;
 }
+
 .component {
     text-align: center;
 }
@@ -32,32 +30,32 @@ small {
   height:64px;
 }
 
+// under 100% self-sufficient
 .under {
-  background-color: #a8e0d8;
-  color: black;
+  background-color: $under;
 }
 
+// under 100% self-sufficient
 .sufficient {
-  background-color: #1c8677;
+  background-color: $sufficient;
+}
+
+// above 100% self-sufficient
+.over {
+  background-color: $above;
+}
+
+.under .sufficient .over {
+  color: $text-color;
 }
 
 .jumbotron {
-  background-color: #c1c1c1;
   padding-top:15px;
   margin-top:20px;
+
   h1 {
     font-size:45px;
-    font-­family: "Roboto Condensed", Helvetica, sans­serif;
   }
-}
-
-.over {
-  background-color: #ffc928;
-  color: black;
-}
-
-.row {
-  background-color: white;
 }
 
 .col-md-12.component.wage-slider {
@@ -65,60 +63,13 @@ small {
   padding-left: 0px;
 }
 
-/* Font styling */
-
-h1, h2, h3, h4, h5, h6, p {
-margin­bottom: 6px;
-color: #393434;
-}
-
-h1, h2, h3 {
-font-­family: "Roboto Condensed", Helvetica, sans­serif;
-font-weight: 700;
-}
-
-h1 {
-font-size: 30px;
-}
-
-h2 {
-font-size: 20px;
-}
-
-h3 {
-font-size: 16px;
-}
-
-h4 {
-  font-family: "Robot Condensed", Helvetica, sans­serif;
-font-size: 20px;
-}
-
-h5, h6, p, body {
-  font-family: "Roboto", Helvetica, sans­serif;
-}
-
-h5 {
-font-weight: 700;
-font-size: 16px;
-}
-
-h6 {
-font-weight: 500;
-font-size: 16px;
-}
-
-p {
-font-size: 14px;
-}
-
-a {
-  color: $teal3;
-  font-weight: bold;
-}
-
 .col-md-12 .text-center {
   margin: 5% 0;
 }
 
+hr {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
 

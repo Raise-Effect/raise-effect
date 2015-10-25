@@ -42,3 +42,12 @@
 .rc-slider-tooltip-placement-points-bc-tc .rc-slider-tooltip-arrow {
     border-top-color: #000;
 }
+
+.panel-body {
+    background-color: $background-color;
+}
+
+.hour, .day, .week, .month, .year{
+    font-weight: bold;
+    font-size: 1.2em;
+}

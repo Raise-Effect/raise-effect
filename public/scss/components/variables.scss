@@ -3,6 +3,26 @@
 //
 // TODO: we don't need all of these and should erase what we're not using
 
+$background-color: #efefef; //light grey
+$bg-header-footer: #505050;
+
+$accent-color: #25b29e; //teal
+
+
+// Text Variables
+$text-color: #222; // dark grey
+//$base-font-size;
+//$base-font-family;
+//$base-font-weight;
+
+// Sufficiency Colors
+$under: #a8e0d8;
+$sufficient: #1c8677;
+$above: #ffc928;
+
+// Colors from the style guide 
+// TODO: delele unused ones
+
 $grey1: #d9d9d9; 
 $grey2: #c6c6c6; 
 $grey3: #a1a1a1; 
@@ -26,5 +46,7 @@ $yellow2: #ffdf7e;
 $yellow3: #ffcf28;
 $yellow4: #bf971e;
 $yellow5: #7f6514;
+
+
 
 //$main-font: "Roboto Condensed", Helvetica, sans­serif;

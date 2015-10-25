@@ -1,0 +1,40 @@
+/* Whichever you want to use */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700|Roboto+Condensed:400,700);
+@font-face {
+  font-family: 'ChunkFiveRegular';
+  src: url('/public/images/Chunkfive.otf');
+  src: url('/public/images/Chunkfive.otf?#iefix') format('otf'),
+  url('/public/images/Chunkfive.otf') format('otf'),
+  url('/public/images/Chunkfive.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Fonts
+body {
+  	font-family: Helvetica, sans­serif;
+  	background-color: #background-color;
+}
+
+
+// Headers + Text
+h1 {
+  	font-size: 2em;
+}
+h2 {
+  	font-size: 1.5em;
+}
+h3 {
+	font-size: 1.25em;
+}
+
+p {
+	font-size: 1em;
+}
+
+
+// Links
+a {
+  	color: $teal3;
+  	font-weight: bold;
+}

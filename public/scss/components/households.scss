@@ -18,3 +18,12 @@
   width:70px;
   left: -35px;
 }
+
+.progress {
+  background-color: $grey2;
+}
+
+.dropdown-menu {
+  max-height: 150px;
+  overflow-y: scroll;
+}

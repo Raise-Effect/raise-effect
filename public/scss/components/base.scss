@@ -22,8 +22,11 @@ body {
 .dropdown-menu {
   z-index:9999;
 }
+
 small {
-      color: #777;
+  text-align: left;
+  line-height: 1.75em;
+  color: #777;
 }
 
 .icon-height {
@@ -69,9 +72,22 @@ small {
   margin: 5% 0;
 }
 
+.col-md-6.component.map, .col-md-6.component.households {
+  padding: 0 2.5%;
+}
+
 hr {
     height: 12px;
     border: 0;
     box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+p.data-hint {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+p.data-hint.add-margin{
+  padding-top: 34px;
 }
 

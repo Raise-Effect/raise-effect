@@ -12,7 +12,7 @@ let Team = React.createClass({
 
         <div className="row">
           { _.map(teamData, (member) => {
-              return <TeamMember photo={member.photoPath} name={member.name} title={member.title} />
+              return <TeamMember key={member.name} photo={member.photoPath} name={member.name} title={member.title} />
             })
           }
         </div>

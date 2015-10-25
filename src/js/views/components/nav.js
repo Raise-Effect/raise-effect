@@ -8,7 +8,10 @@ let Nav = React.createClass({
           <div className="container">
               <div className="navbar-header">
                   <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
-                  <i className="fa fa-bars"></i>
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
                   </button>
                   <div className="navbar-brand">
                     <Link to="/"><img src="/public/images/logo.png"/></Link>

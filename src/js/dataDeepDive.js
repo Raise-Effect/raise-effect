@@ -58,22 +58,22 @@ let DataDeepDive = React.createClass({
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Total:</td><td>859,685</td><td>+/-411</td>
+                        <td>Total</td><td>859,685</td><td>+/-411</td>
                     </tr>
                     <tr>
-                        <td>In family households</td><td>852,132</td><td>+/-1,056</td>
+                        <td>&nbsp;In family households</td><td>852,132</td><td>+/-1,056</td>
                     </tr>
                     <tr>
-                        <td>In married-couple family</td><td>590,606</td><td>+/-5,277</td>
+                        <td>&nbsp;&nbsp;In married-couple, family</td><td>590,606</td><td>+/-5,277</td>
                     </tr>
                     <tr>
-                        <td>In male householder, no wife present, family</td><td>69,343</td><td>+/-2,650</td>
+                        <td>&nbsp;&nbsp;In male householder, no wife present, family</td><td>69,343</td><td>+/-2,650</td>
                     </tr>
                     <tr>
-                        <td>In female householder, no husband present, family</td><td>192,183</td><td>+/-4,328</td>
+                        <td>&nbsp;&nbsp;In female householder, no husband present, family</td><td>192,183</td><td>+/-4,328</td>
                     </tr>
                     <tr>
-                       <td>In nonfamily households</td><td>7,553</td><td>+/-897</td>
+                       <td>&nbsp;In nonfamily households</td><td>7,553</td><td>+/-897</td>
                    </tr>
                 </tbody>
             </table>

@@ -68,27 +68,49 @@ let HomePage = React.createClass({
       this.loadData();
     },
     loadData: function() {
-      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages(), api.getPopulation(), api.getWageStats())
-      .done((censusData, weightData, sssData, popData, wageData) => {
+      $.when(api.getCensusHousehold(), api.getWeights(), api.getSSSWages(), api.getPopulation(), api.getWageStats(), api.getSSSBudget())
+      .done((censusData, weightData, sssData, popData, wageData, budget) => {
         this.setState({
           census: _.indexBy(censusData[0].data, 'fips'),
           weight: _.groupBy(weightData[0].data, 'fips'),
           wageStats: _.groupBy(wageData[0].data, 'fips'),
           ssswages: _.groupBy(this.getOregonWages(sssData[0].data), 'fips'),
-          population: _.groupBy(popData[0].data, 'fips')
+          population: _.groupBy(popData[0].data, 'fips'),
+          budgets: _.groupBy(budget[0].data, 'fips')
         });
       })
     },
     getBudgetData: function() {
-      return [
-        {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842},
-        {name: "Food", singleParent: 608, singleAdult: 250, marriedFamily: 841},
-        {name: "Childcare", singleParent: 906, singleAdult: 0, marriedFamily: 944},
-        {name: "Healthcare", singleParent: 425, singleAdult: 127, marriedFamily: 480},
-        {name: "Transportation", singleParent: 231, singleAdult: 225, marriedFamily: 442},
-        {name: "Taxes", singleParent: 691, singleAdult: 332, marriedFamily: 767},
-        {name: "Misc", singleParent: 301, singleAdult: 127, marriedFamily: 352}
-      ];
+      if (this.state.selectedCounty.fips === "41") {
+        return [
+          {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842},
+          {name: "Food", singleParent: 608, singleAdult: 250, marriedFamily: 841},
+          {name: "Childcare", singleParent: 906, singleAdult: 0, marriedFamily: 944},
+          {name: "Healthcare", singleParent: 425, singleAdult: 127, marriedFamily: 480},
+          {name: "Transportation", singleParent: 231, singleAdult: 225, marriedFamily: 442},
+          {name: "Taxes", singleParent: 691, singleAdult: 332, marriedFamily: 767},
+          {name: "Misc", singleParent: 301, singleAdult: 127, marriedFamily: 352}
+        ];
+      }
+      else {
+        var budgets = this.state.budgets[this.state.selectedCounty.fips];
+        var weights = this.state.weight[this.state.selectedCounty.fips];
+        var singleAdult = this.getWeightedBudget(singleAdultTypes,budgets,weights);
+        var singleParent = this.getWeightedBudget(singleParentFamilyTypes,budgets,weights);
+        var marriedFamily = this.getWeightedBudget(marriedParentFamilyTypes,budgets,weights);
+        _.forOwn(singleAdult, function(value, key) { singleAdult[key] = Math.round(value) } );
+        _.forOwn(singleParent, function(value, key) { singleParent[key] = Math.round(value) } );
+        _.forOwn(marriedFamily, function(value, key) { marriedFamily[key] = Math.round(value) } );
+        return [
+          {name: "Housing", singleParent: singleParent.housing, singleAdult: singleAdult.housing, marriedFamily: marriedFamily.housing},
+          {name: "Food", singleParent: singleParent.food, singleAdult: singleAdult.food, marriedFamily: marriedFamily.food},
+          {name: "Childcare", singleParent: singleParent.childcare, singleAdult: singleAdult.childcare, marriedFamily: marriedFamily.childcare},
+          {name: "Healthcare", singleParent: singleParent.healthcare, singleAdult: singleAdult.healthcare, marriedFamily: marriedFamily.healthcare},
+          {name: "Transportation", singleParent: singleParent.transportation, singleAdult: singleAdult.transportation, marriedFamily: marriedFamily.transportation},
+          {name: "Taxes", singleParent: singleParent.taxes, singleAdult: singleAdult.taxes, marriedFamily: marriedFamily.taxes},
+          {name: "Misc", singleParent: singleParent.miscellaneous, singleAdult: singleAdult.miscellaneous, marriedFamily: marriedFamily.miscellaneous}
+        ];
+      }
     },
     getOregonWages: function(data) {
       var oregonFipsData = _(data).groupBy('familyCode').map((codeData, key) => {
@@ -274,7 +296,36 @@ let HomePage = React.createClass({
       if (a == Infinity) return 0;
       return a;
     },
+    getWeightedBudget: function(familyCodes, countyBudgets, countyWeights) {
+      var budgets = _.map(familyCodes,(code) => {
+        var budget = _.find(countyBudgets, (wage) => wage.familyCode === code);
+        var weight = _.find(countyWeights, (weight) => weight.familyCode === code);
 
+        if (!budget) return 0;
+
+        return {
+          food: budget.food * (weight && (weight.weight) || 1),
+          childcare: budget.childcare * (weight && (weight.weight) || 1),
+          healthcare: budget.healthcare * (weight && (weight.weight) || 1),
+          housing: budget.housing * (weight && (weight.weight) || 1),
+          miscellaneous: budget.miscellaneous * (weight && (weight.weight) || 1),
+          taxes: budget.taxes * (weight && (weight.weight) || 1),
+          transportation: budget.transportation * (weight && (weight.weight) || 1)
+        };
+      });
+      var result = {food: 0,childcare: 0,healthcare: 0,housing: 0,miscellaneous: 0,
+                    taxes: 0,transportation: 0};
+      _.each(budgets, (budget) => {
+        result.food += budget.food;
+        result.childcare += budget.childcare;
+        result.healthcare += budget.healthcare;
+        result.housing += budget.housing;
+        result.miscellaneous += budget.miscellaneous;
+        result.taxes += budget.taxes;
+        result.transportation += budget.transportation;
+      });
+      return result;
+    },
     render: function() {
         return (
             <div className="col-xs-12">

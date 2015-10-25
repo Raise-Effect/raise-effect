@@ -12,7 +12,7 @@ let FamilyLife = React.createClass({
       return (
         <div key={data.name} className="row">
           <div className="col-xs-2 text-right">
-            <h3>{data.name}</h3>
+            <h3 className="row-header">{data.name}</h3>
           </div>
           <div className="col-xs-3 text-center">
             <div className="color-box sufficient">

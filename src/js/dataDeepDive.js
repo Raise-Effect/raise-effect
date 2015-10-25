@@ -1,6 +1,6 @@
 import React from "react";
 
-let Data = React.createClass({
+let DataDeepDive = React.createClass({
 
   render: function() {
     return (
@@ -26,7 +26,7 @@ let Data = React.createClass({
                 present. Finally, those family households with own children present can be divided into those with children under six years old only, six to seventeen years old only,
                 or both children under six and those six to seventeen.
             </p>
-            <img className="img-responsive" src="./public/images/data-deep-dive/households-tree.png" />
+            <img className="img-responsive data-deep-dive-img" src="./public/images/data-deep-dive/households-tree.png" />
             <p>
                 For the purpose of this project, single adults without children are assumed to equate to non-family households, single parents with two children are an aggregate of
                 ten self-sufficiency study family types which equates to the sum of unmarried family households with own children present, and two parent families with two children
@@ -36,7 +36,7 @@ let Data = React.createClass({
             <p>
                 Census Data set S1101 shows percentage breakdown of age of own children present in married households and unmarried male and unmarried female households.
             </p>
-            <img className="img-responsive" src="./public/images/data-deep-dive/census-weights.png" />
+            <img className="img-responsive data-deep-dive-img" src="./public/images/data-deep-dive/census-weights.png" />
             <ol>
                 <li>Express the ratio of unmarried male to unmarried female households with own children present as percentage of sum of unmarried households.</li>
                 <li>Combine the male and female unmarried parent breakdown percentages by likelihood that unmarried parent is male or female.</li>
@@ -87,10 +87,10 @@ let Data = React.createClass({
                 and while single adults and single parents represent households with only one supporting income, married parents represent households with two supporting incomes.
             </p>
             <h4>Oregon Statewide Low Income Households By Family Type:</h4>
-            <img className="img-responsive" src="./public/images/data-deep-dive/low-income-pie-chart.png" />
+            <img className="img-responsive data-deep-dive-img" src="./public/images/data-deep-dive/low-income-pie-chart.png" />
         </div>
     )
   }
 })
 
-export default Data
+export default DataDeepDive

@@ -40,8 +40,24 @@ let FamilyLife = React.createClass({
         <h1>Self-Sufficency Breakdown for Households</h1>
         <hr/>
         <p>Looking at our three households (single adult, single parent with two children, and
-            two parents with two children), this is how much the self-suffiency study expects 
+            two parents with two children), this is how much the self-suffiency study expects
             to be spent on basic needs.</p>
+        <form class="form-inline">
+          <div class="form-group">
+            <label>State/County:&nbsp;</label>
+            <div className="btn-group">
+              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {this.props.selectedCounty.name} <span className="caret"></span>
+              </button>
+              <ul className="dropdown-menu">
+                { _.map(this.props.counties, (county) => {
+                    return <li key={county.fips} onClick={_.bind(this.props.selectCounty, this, county)}><a>{county.name}</a></li>
+                  })
+                }
+              </ul>
+            </div>
+          </div>
+        </form>
       </div>
         <div className="row">
           <div className="col-xs-2">

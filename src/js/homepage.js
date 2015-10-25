@@ -83,7 +83,7 @@ let HomePage = React.createClass({
     getBudgetData: function() {
       if (this.state.selectedCounty.fips === "41") {
         return [
-          {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842},
+          {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842 },
           {name: "Food", singleParent: 608, singleAdult: 250, marriedFamily: 841},
           {name: "Childcare", singleParent: 906, singleAdult: 0, marriedFamily: 944},
           {name: "Healthcare", singleParent: 425, singleAdult: 127, marriedFamily: 480},
@@ -265,7 +265,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) : 0;
       }).sum() * 100)
 
       return a;
@@ -277,7 +277,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) * householdNumber : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) * householdNumber : 0;
       }).sum());
 
       return a;
@@ -291,7 +291,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(annual.annual) * (weight && (weight.weight) || 1);
+        return Math.round(annual.annual) * ((weight ? weight.weight : 1));
       }).sum() * 100)
       if (a == Infinity) return 0;
       return a;
@@ -304,13 +304,13 @@ let HomePage = React.createClass({
         if (!budget) return 0;
 
         return {
-          food: budget.food * (weight && (weight.weight) || 1),
-          childcare: budget.childcare * (weight && (weight.weight) || 1),
-          healthcare: budget.healthcare * (weight && (weight.weight) || 1),
-          housing: budget.housing * (weight && (weight.weight) || 1),
-          miscellaneous: budget.miscellaneous * (weight && (weight.weight) || 1),
-          taxes: budget.taxes * (weight && (weight.weight) || 1),
-          transportation: budget.transportation * (weight && (weight.weight) || 1)
+          food: budget.food * (weight ? weight.weight : 1),
+          childcare: budget.childcare * (weight ? weight.weight : 1),
+          healthcare: budget.healthcare * (weight ? weight.weight : 1),
+          housing: budget.housing * (weight ? weight.weight : 1),
+          miscellaneous: budget.miscellaneous * (weight ? weight.weight : 1),
+          taxes: budget.taxes * (weight ? weight.weight : 1),
+          transportation: budget.transportation * (weight ? weight.weight : 1)
         };
       });
       var result = {food: 0,childcare: 0,healthcare: 0,housing: 0,miscellaneous: 0,
@@ -401,7 +401,7 @@ let HomePage = React.createClass({
 
 
                 <div className="row">
-                  <FamilyLife data={this.getBudgetData()}/>
+                  <FamilyLife selectCounty={this.selectCounty} counties={counties} selectedCounty={this.state.selectedCounty} data={this.getBudgetData()}/>
                 </div>
 
 

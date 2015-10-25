@@ -12,8 +12,8 @@ let Footer = React.createClass({
               </div>
               <ul className="footer-nav nav-stacked text-center">
                   <li><Link to="/about">Study</Link></li>
-                  <li><a href="#">Discussion</a></li>
-                  <li><a href="#">Data Deep Dive</a></li>
+                  <li><Link to="/discussion">Discussion</Link></li>
+                  <li><Link to="/data">Data Deep Dive</Link></li>
                   <li><Link to="/team">Team</Link></li>
               </ul>
               <ul className="share-buttons text-center">

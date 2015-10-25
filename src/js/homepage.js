@@ -2,7 +2,6 @@ import React from "react";
 import StickyDiv from "react-stickydiv";
 import SliderBox from './views/components/sliderBox';
 import Households from './views/components/households';
-import ProgressBar from './views/components/progressBar';
 import FamilyLife from './views/components/familyLife';
 import SufficiencyBarChart from './views/components/sufficiencyBarChart';
 import MapView from './views/components/MapView';
@@ -10,6 +9,7 @@ import counties from './../fixtures/counties';
 import _ from 'lodash';
 import $ from 'jquery';
 import api from './api';
+import { Link } from 'react-router';
 
 let singleAdultTypes = [
   "a1i0p0s0t0"
@@ -333,8 +333,8 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>The Oregon Minimum Wage</h1>
                     <hr/>
-                    <p>The minimum wage is <a href="#">$9.25</a>. Is that enough? We’ve looked at three types of families in the state of Oregon 
-                      to see if the current minimum wage supports self-sufficiency. 
+                    <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? We’ve looked at three types of families in the state of Oregon
+                      to see if the current minimum wage supports self-sufficiency.
                       (All data we used is from 2014.)</p>
                     <div className="text-center">
                       <p>Would you raise the minimum wage?</p>
@@ -352,12 +352,12 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
-                    <p></p>    
+                    <p></p>
                   </div>
                   <div className="col-md-6 component map">
                     <h2>What’s the Regional Impact?</h2>
                     <small>Understanding that some households will meet or exceed self-sufficiency at different rates,
-                    the color of the county relates to an average of all low income family types (link) in a county. </small>
+                    the color of the county relates to an average of all <Link to="/data">low income family types</Link> in a county. </small>
                         <h3>
                             <div className="btn-group">
                               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -389,9 +389,9 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
-                    <p></p>    
+                    <p></p>
                   </div>
-                </div>  
+                </div>
 
                 <div className="row">
                   <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}

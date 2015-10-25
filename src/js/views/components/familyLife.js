@@ -37,9 +37,11 @@ let FamilyLife = React.createClass({
 		return (
       <div>
       <div className="jumbotron">
-        <h1>Oregon Family Life</h1>
+        <h1>Self-Sufficency Breakdown for Households</h1>
         <hr/>
-        <p>Below describes how the Self Sufficiency Wage is calculated per each family type for the state of Oregon.</p>
+        <p>Looking at our three households (single adult, single parent with two children, and
+            two parents with two children), this is how much the self-suffiency study expects 
+            to be spent on basic needs.</p>
       </div>
         <div className="row">
           <div className="col-xs-2">

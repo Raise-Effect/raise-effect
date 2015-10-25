@@ -7,7 +7,7 @@ let SliderTooltip = React.createClass({
       <div className="panel panel-default">
         <div className="panel-body">
           <ul className="list-inline">
-            <li>Wage Breakdown: </li>
+            <li>Wages: </li>
             <li><span className="hour">$ { this.props.value.toFixed(2) }</span> /hour</li>
             <li><span className="day">$ { this.props.value * 8 }</span> /day</li>
             <li><span className="week">$ { Math.round(this.props.value * 8 * 5) }</span> /week</li>

@@ -279,32 +279,31 @@ let HomePage = React.createClass({
         return (
             <div className="col-xs-12">
                 <div className="row">
-                    <div className="col-md-12">
-                        <div className="text-center">
-                            <h2>The Oregon minimum wage is currently <a href="#">$9.25</a>. 
-                            Is that enough? We’ve looked at three types of families in the state of Oregon 
-                            to see if the current minimum wage supports self-sufficiency.</h2>
-                        </div>
+                  <div className="jumbotron">
+                    <h1>The Oregon Minimum Wage</h1>
+                    <hr/>
+                    <p>The minimum wage is <a href="#">$9.25</a>. Is that enough? We’ve looked at three types of families in the state of Oregon 
+                      to see if the current minimum wage supports self-sufficiency. 
+                      (All data we used is from 2014.)</p>
+                    <div className="text-center">
+                      <p>Would you raise the minimum wage?</p>
                     </div>
+                    <div id="slider">
+                        <SliderBox
+                          value={this.state.sliderWage}
+                          onChange={this.handleSliderWageChange}
+                        />
+                    </div>
+                  </div>
                 </div>
 
-              <StickyDiv>
                 <div className="row">
-                    <div className="col-md-12 component wage-slider">
-                        <h1>Would you raise the minimum wage?</h1>
-                        <h3>Drag the slider to see the impact of minimum wage.</h3>
-                        <div id="slider">
-                          <SliderBox
-                            value={this.state.sliderWage}
-                            onChange={this.handleSliderWageChange}
-                          />
-                        </div>
-                    </div>
-                </div>
-              </StickyDiv>
-
-                <div className="row">
-                    <div className="col-md-6 component map">
+                  <div className="jumbotron">
+                    <h1>What is the Impact of the Minimum Wage?</h1>
+                    <hr/>
+                    <p></p>    
+                  </div>
+                  <div className="col-md-6 component map">
                     <h2>What’s the Regional Impact?</h2>
                     <small>Understanding that some households will meet or exceed self-sufficiency at different rates,
                     the color of the county relates to an average of all low income family types (link) in a county. </small>
@@ -334,14 +333,28 @@ let HomePage = React.createClass({
                       />
                     </div>
                 </div>
+
+                <div className="row">
+                  <div className="jumbotron">
+                    <h1>What is the Impact of the Minimum Wage?</h1>
+                    <hr/>
+                    <p></p>    
+                  </div>
+                </div>  
+
                 <div className="row">
                   <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}
                                        groups={this.state.barGroups}
                                        />
                 </div>
+
+
                 <div className="row">
                   <FamilyLife data={this.getBudgetData()}/>
                 </div>
+
+
+
             </div>
         )
     }

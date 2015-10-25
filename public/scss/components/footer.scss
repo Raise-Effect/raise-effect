@@ -4,8 +4,16 @@
   .footer-header {
     margin-top: 10px;
     font-size: 2em;
+    line-height:1em;
+    margin-bottom:10px;
     a {
       color: $grey1;
+    }
+    .sub-header {
+      a {
+        color: $grey2;
+        font-size: .5em
+      }
     }
     a:hover,a:focus {
         color: $grey1;

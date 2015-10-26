@@ -96,14 +96,14 @@ let SufficiencyBarChart = React.createClass({
         <div className="col-xs-12">
             <div className="info hidden-xs legend bar-legend">
             <i className="bar-poverty"></i>Federal Poverty Line<br/>
-            <i className="bar-sss"></i>Self-Sufficiency Standard<br/>
-            <i className="bar-median"></i>Median Wage<br/>
+            <i className="bar-sss"></i>Self-Sufficiency Wage<br/>
+            <i className="bar-median"></i>Median Income<br/>
             <i className="bar-annual"></i>Annual Income<br/>
             </div>
             <div className="info hidden-md hidden-lg hidden-sm legend bar-legend-fixed">
             <i className="bar-poverty"></i>Federal Poverty Line<br/>
-            <i className="bar-sss"></i>Self-Sufficiency Standard<br/>
-            <i className="bar-median"></i>Median Wage<br/>
+            <i className="bar-sss"></i>Self-Sufficiency Wage<br/>
+            <i className="bar-median"></i>Median Income<br/>
             <i className="bar-annual"></i>Annual Income<br/>
             </div>
             <div className="chart"></div>

@@ -42,8 +42,8 @@ let FamilyLife = React.createClass({
         <p>Looking at our three households (single adult, single parent with two children, and
             two parents with two children), this is how much the self-sufficiency study expects
             to be spent on basic needs.</p>
-        <form class="form-inline">
-          <div class="form-group">
+        <form className="form-inline">
+          <div className="form-group">
             <label>State/County:&nbsp;</label>
             <div className="btn-group">
               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

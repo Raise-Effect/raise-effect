@@ -408,19 +408,22 @@ let HomePage = React.createClass({
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
                     <p>Would you raise the minimum wage? And what impact will that have on full-time
-                      minimum wage workers in the state of Oregon.</p>  
+                      minimum wage workers in the state of Oregon.</p>
 
-                    <div id="slider">
+                    <div className="slider-container">
                         <SliderBox
                           value={this.state.sliderWage}
                           onChange={this.handleSliderWageChange}
                         />
-                    </div>  
-          
+                    </div>
+
                     <div className="col-md-6 component map">
                       <h2>What is the Impact in Oregon and Each County Within the State?</h2>
-            
-                        <h3>
+
+                        
+                        <form className="form-inline">
+                          <div className="form-group">
+                            <label>State/County:&nbsp;</label>
                             <div className="btn-group">
                               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {this.state.selectedCounty.name} <span className="caret"></span>
@@ -432,15 +435,18 @@ let HomePage = React.createClass({
                                 }
                               </ul>
                             </div>
-                        </h3>
+                          </div>
+                        </form>
+
+
 
                         <div id="map">
                           <MapView selectedCounty={this.state.selectedCounty.fips} onMapSelect={this.selectCounty} sufficiency={this.getMapSufficiencyPercents()} />
                         </div>
-                          <p className="data-hint"><u>Data Hint</u>: Understanding that some households will meet or exceed self-sufficiency 
-                            at different rates, the color of the county relates to an average of all 
+                          <p className="data-hint"><u>Data Hint</u>: Understanding that some households will meet or exceed self-sufficiency
+                            at different rates, the color of the county relates to an average of all
                             low income family types (link) in a county.</p>
-                      </div>                
+                      </div>
 
                       <div className="col-md-6 component households" id="households">
                         <Households
@@ -455,10 +461,16 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>Does this Wage Allow Households to Meet or Exceed Basic Benchmarks?</h1>
                     <hr/>
-                    <p>When households with children meet benchmarks, single adult households are 
+                    <p>When households with children meet benchmarks, single adult households are
                       exceeding benchmarks. This is a consistent phenomenon in the data across all regions,
                       although the distribution of low income population across different household types
-                      will vary from region to region.</p>    
+                      will vary from region to region.</p>
+                      <div className="slider-container">
+                          <SliderBox
+                            value={this.state.sliderWage}
+                            onChange={this.handleSliderWageChange}
+                          />
+                      </div>
                   </div>
                 </div>
 

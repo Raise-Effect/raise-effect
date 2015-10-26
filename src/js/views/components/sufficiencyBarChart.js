@@ -69,10 +69,14 @@ let SufficiencyBarChart = React.createClass({
       .data(chartData)
       .enter().append("svg")
       .attr("class", "bullet nvd3")
+      .attr("preserveAspectRatio","xMinYMin meet")
+      .attr("viewBox", "0 0 1140 112")
+      .attr("width","100%")
+      .attr("height", "8em")
       .transition().duration(1000)
       .call(bulletChart);
 
-    d3.selectAll(".nv-markerTriangle").remove();
+      d3.selectAll(".nv-markerTriangle").remove();
 
     this.chartType = bulletChart;
   },

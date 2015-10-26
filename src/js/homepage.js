@@ -456,10 +456,8 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>Does this Wage Allow Households to Meet or Exceed Basic Benchmarks?</h1>
                     <hr/>
-                    <p>When households with children meet benchmarks, single adult households are
-                      exceeding benchmarks. This is a consistent phenomenon in the data across all regions,
-                      although the distribution of low income population across different household types
-                      will vary from region to region.</p>
+                    <p>To better understand self-sufficiency, the graph below frames it between the Federal Poverty Line
+                        and the Median Income for each household type. What happens when one household type easily exceeds a benchmark and others are struggling to reach it? How do these benchmarks change by location?</p>
                       <div className="slider-container">
                           <SliderBox
                             value={this.state.sliderWage}
@@ -475,7 +473,9 @@ let HomePage = React.createClass({
                                        groups={this.state.barGroups}
                   />
                 </div>
-
+                <div>
+                    <p className="data-hint"><br/><u>Data Hint</u>: Keep in mind the distribution of low income population across different household types will vary from region to region.</p>
+                </div>
                 <div className="row">
                   <FamilyLife selectCounty={this.selectCounty} counties={counties} selectedCounty={this.state.selectedCounty} data={this.getBudgetData()}/>
                 </div>

@@ -33,13 +33,13 @@ let SufficiencyBarChart = React.createClass({
           wageData[group.populationKey].povertyLine,
           wageData[group.populationKey].sufficiencyWage,
           wageData[group.populationKey].medianIncome,
-          wageData[group.populationKey].householdMedianIncome
+          // wageData[group.populationKey].householdMedianIncome
         ],
         "rangeLabels": [
-          "Poverty Line",
-          "Self-Sufficiency Wage",
+          // "Median Household Income",
           "Median Income",
-          "Median Household Income"
+          "Self-Sufficiency Wage",
+          "Poverty Line"
         ]
       };
 
@@ -70,6 +70,9 @@ let SufficiencyBarChart = React.createClass({
       .transition().duration(1000)
       .call(bulletChart);
 
+    d3.selectAll(".nv-markerTriangle").remove();
+    d3.selectAll(".nv-titles").remove();
+
     this.chartType = bulletChart;
   },
 
@@ -81,7 +84,7 @@ let SufficiencyBarChart = React.createClass({
         </div>
      </div>
     );
-	},
+  },
 
   componentDidMount: function() {
     this.renderChart();

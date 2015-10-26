@@ -308,7 +308,7 @@ let HomePage = React.createClass({
       var sufficiencyWageData = this.getAnnualSufficiencyWage(),
           medianIncomeData    = this.getMedianIncome();
 
-      return {
+      var data =  {
         singleAdult: {
           povertyLine: 11490,
           sufficiencyWage: sufficiencyWageData.singleAdult,
@@ -328,6 +328,8 @@ let HomePage = React.createClass({
           householdMedianIncome: medianIncomeData.household
         }
       }
+
+      return data;
     },
 
     getAggregatePercent: function(wage, familyCodes, countyWages, countyWeights) {

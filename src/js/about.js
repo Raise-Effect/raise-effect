@@ -10,6 +10,17 @@ let About = React.createClass({
     return (
       <div className="">
       <h1>The Self-Sufficiency Standard</h1>
+      <p>
+        With this project we wanted to see if and how a higher minimum wage would
+        impact the life of someone working full-time at minimum wage. For that,
+        we took at look at the the <a href="http://www.selfsufficiencystandard.org/standard.html">Self-Sufficiency Standard</a> — a budget-based measure
+        of the real cost of living and an alternative to the federal poverty measure.
+        The Self-Sufficiency Standard determines the amount of income required for
+        working families to meet basic needs at a minimally adequate level, taking into
+        account family composition, ages of children, and geographic differences in costs.
+        Self-Sufficiency is defined as how much income families of various sizes and compositions
+        need to make ends meet — without public or private assistance.
+      </p>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -87,6 +98,32 @@ let About = React.createClass({
           </tr>
         </tbody>
       </table>
+      <p>
+        Overall, the Self-Sufficiency Standard includes detailed cost of living information for 152 different family compositions
+        from a single adult living alone to as many four adults and three children of varying ages.
+      </p>
+      <p>
+        <a href="http://www.selfsufficiencystandard.org/docs/Oregon2014.pdf">Download</a> the 2014 Oregon Self-Sufficiency Standard Report to explore this information for yourself.
+      </p>
+      <h2>How the self-sufficiency standard has been used</h2>
+      <h4>In Local Media</h4>
+      <p>
+        <div><a href="http://www.oregonlive.com/portland/index.ssf/2014/06/poverty_in_multnomah_county_a.html">Poverty in Multnomah County: A third of residents can't meet basic needs</a></div>
+        <div><a href="http://portlandtribune.com/pt/9-news/275943-151401-kotek-cites-groups-figures-in-pegging-minimum-wage">Kotek cites group's figures in pegging minimum wage</a></div>
+    </p>
+    <h4>By Local Agencies and Organizations</h4>
+    <p>
+        <div><a href="https://www2.prosperityplanner.org/">The Prosperity Planner for Oregon Residents</a></div>
+        <div><a href="http://www.northwesthealth.org/news/archive/2015/10/20/oregon-minimum-wage-boiled-down">Oregon Minimum Wage, Boiled Down</a></div>
+        <div><a href="http://www.worksystems.org/self-sufficiency">Regional Analysis of Self-Sufficiency Completed</a></div>
+        <div><a href="http://portlandpulse.org/node/352/taxonomy/term/92/">The Self-Sufficiency Standard Indicator by Greater Portland Pulse</a></div>
+        <div><a href="http://mkn.research.pdx.edu/2010/01/self-sufficiency/">Where the Ends Don’t Meet: Measuring Poverty and Self-Sufficiency Among Oregon’s Families</a></div>
+    </p>
+    <h4>Elsewhere in the US</h4>
+    <p>
+        <div><a href="http://www.pbs.org/newshour/making-sense/how-much-is-enough/">How Much Do You Need to Survive: An Interactive Guide to the Living Wage</a></div>
+        <div><a href="http://storymaps.esri.com/stories/2015/living-wage-map/">The Living Wage Map</a></div>
+    </p>
     </div>
   );
   }

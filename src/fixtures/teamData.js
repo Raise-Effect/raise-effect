@@ -70,7 +70,7 @@ let teamData = [
     "photoPath": "danielwest.jpeg"
   },
   {
-    "name": "Flora Worely",
+    "name": "Flora Worley",
     "title": "Software Engineer",
     "photoPath": "floraworley.jpeg"
   },

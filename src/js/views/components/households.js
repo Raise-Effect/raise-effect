@@ -2,6 +2,7 @@ import React from 'react';
 import FamilyTypeBreakdown from '../components/familyTypeBreakdown';
 import ProgressBar from '../components/progressBar';
 import _ from "lodash";
+import { Link } from 'react-router';
 
 let Households = React.createClass({
   getDefaultProps: function() {
@@ -36,7 +37,7 @@ let Households = React.createClass({
 	render() {
 		return (
       <div>
-        <h2>How Many Households are <a href="">Self-Sufficient</a> at the Given Wage?</h2>
+        <h2>How Many Households are <Link to="/about">Self-Sufficient</Link> at the Given Wage?</h2>
         <ProgressBar completed={this.props.data.geoPercent}/>
         <p className="data-hint">{this.props.data.geoPercent}% of households in this region are low income.</p>
         {

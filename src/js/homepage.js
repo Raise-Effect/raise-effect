@@ -2,7 +2,6 @@ import React from "react";
 import StickyDiv from "react-stickydiv";
 import SliderBox from './views/components/sliderBox';
 import Households from './views/components/households';
-import ProgressBar from './views/components/progressBar';
 import FamilyLife from './views/components/familyLife';
 import SufficiencyBarChart from './views/components/sufficiencyBarChart';
 import MapView from './views/components/MapView';
@@ -10,6 +9,7 @@ import counties from './../fixtures/counties';
 import _ from 'lodash';
 import $ from 'jquery';
 import api from './api';
+import { Link } from 'react-router';
 
 let singleAdultTypes = [
   "a1i0p0s0t0"
@@ -83,7 +83,7 @@ let HomePage = React.createClass({
     getBudgetData: function() {
       if (this.state.selectedCounty.fips === "41") {
         return [
-          {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842},
+          {name: "Housing", singleParent: 842, singleAdult: 673, marriedFamily: 842 },
           {name: "Food", singleParent: 608, singleAdult: 250, marriedFamily: 841},
           {name: "Childcare", singleParent: 906, singleAdult: 0, marriedFamily: 944},
           {name: "Healthcare", singleParent: 425, singleAdult: 127, marriedFamily: 480},
@@ -265,7 +265,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) : 0;
       }).sum() * 100)
 
       return a;
@@ -277,7 +277,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight && (weight.weight) || 1) * householdNumber : 0;
+        return Math.round(wage) >= Math.ceil(annual.annual) ? (weight ? weight.weight : 1) * householdNumber : 0;
       }).sum());
 
       return a;
@@ -291,7 +291,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(annual.annual) * (weight && (weight.weight) || 1);
+        return Math.round(annual.annual) * ((weight ? weight.weight : 1));
       }).sum() * 100)
       if (a == Infinity) return 0;
       return a;
@@ -304,13 +304,13 @@ let HomePage = React.createClass({
         if (!budget) return 0;
 
         return {
-          food: budget.food * (weight && (weight.weight) || 1),
-          childcare: budget.childcare * (weight && (weight.weight) || 1),
-          healthcare: budget.healthcare * (weight && (weight.weight) || 1),
-          housing: budget.housing * (weight && (weight.weight) || 1),
-          miscellaneous: budget.miscellaneous * (weight && (weight.weight) || 1),
-          taxes: budget.taxes * (weight && (weight.weight) || 1),
-          transportation: budget.transportation * (weight && (weight.weight) || 1)
+          food: budget.food * (weight ? weight.weight : 1),
+          childcare: budget.childcare * (weight ? weight.weight : 1),
+          healthcare: budget.healthcare * (weight ? weight.weight : 1),
+          housing: budget.housing * (weight ? weight.weight : 1),
+          miscellaneous: budget.miscellaneous * (weight ? weight.weight : 1),
+          taxes: budget.taxes * (weight ? weight.weight : 1),
+          transportation: budget.transportation * (weight ? weight.weight : 1)
         };
       });
       var result = {food: 0,childcare: 0,healthcare: 0,housing: 0,miscellaneous: 0,
@@ -333,8 +333,8 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>The Oregon Minimum Wage</h1>
                     <hr/>
-                    <p>The minimum wage is <a href="#">$9.25</a>. Is that enough? We’ve looked at three types of families in the state of Oregon 
-                      to see if the current minimum wage supports self-sufficiency. 
+                    <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? We’ve looked at three types of families in the state of Oregon
+                      to see if the current minimum wage supports self-sufficiency.
                       (All data we used is from 2014.)</p>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ let HomePage = React.createClass({
                       although the distribution of low income population across different household types
                       will vary from region to region.</p>    
                   </div>
-                </div>  
+                </div>
 
                 <div className="row">
                   <SufficiencyBarChart sufficiency={this.getBarSufficiencyPercents()}
@@ -405,7 +405,7 @@ let HomePage = React.createClass({
                 </div>
 
                 <div className="row">
-                  <FamilyLife data={this.getBudgetData()}/>
+                  <FamilyLife selectCounty={this.selectCounty} counties={counties} selectedCounty={this.state.selectedCounty} data={this.getBudgetData()}/>
                 </div>
 
             </div>

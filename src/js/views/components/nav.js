@@ -25,8 +25,8 @@ let Nav = React.createClass({
               <div className="collapse navbar-collapse" id="main-navigation">
                   <ul className="nav navbar-nav navbar-right">
                       <li><Link to="/about">Study</Link></li>
-                      <li><a href="#">Discussion</a></li>
-                      <li><a href="#">Data Deep Dive</a></li>
+                      <li><Link to="/discussion">Discussion</Link></li>
+                      <li><Link to="/data">Data Deep Dive</Link></li>
                       <li><Link to="/team">Team</Link></li>
                   </ul>
               </div>

@@ -7,6 +7,8 @@ import App from "./js/app";
 import HomePage from "./js/homepage";
 import About from "./js/about";
 import Team from "./js/team";
+import Discussion from "./js/discussion";
+import Data from "./js/data";
 
 window.jQuery = jQuery;
 require('bootstrap');
@@ -17,6 +19,8 @@ render((
       <IndexRoute component={HomePage}/>
       <Route path="/about" component={About} />
       <Route path="/team" component={Team} />
+      <Route path="/discussion" component={Discussion} />
+      <Route path="/data" component={Data} />
     </Route>
   </Router>
 ), document.getElementById('app_container'));

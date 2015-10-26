@@ -38,6 +38,8 @@ export function bulletChart() {
             var availableWidth = nv.utils.availableWidth(width, container, margin),
                 availableHeight = height - margin.top - margin.bottom,
                 that = this;
+            availableWidth = 850;
+
 
             chart.update = function() { chart(selection) };
             chart.container = this;

@@ -90,15 +90,20 @@ let SufficiencyBarChart = React.createClass({
   },
 
   render: function() {
-
     return (
       <div className="row">
         <div className="col-xs-12">
-            <div className="info legend bar-legend">
-            <i className="bar-poverty"></i>Poverty<br/>
-            <i className="bar-sss"></i>Self-Sufficiency<br/>
-            <i className="bar-median"></i>Median<br/>
-            <i className="bar-annual"></i>Annual Salary<br/>
+            <div className="info hidden-xs legend bar-legend">
+            <i className="bar-poverty"></i>Federal Poverty Line<br/>
+            <i className="bar-sss"></i>Self-Sufficiency Standard<br/>
+            <i className="bar-median"></i>Median Wage<br/>
+            <i className="bar-annual"></i>Annual Income<br/>
+            </div>
+            <div className="info hidden-md hidden-lg hidden-sm legend bar-legend-fixed">
+            <i className="bar-poverty"></i>Federal Poverty Line<br/>
+            <i className="bar-sss"></i>Self-Sufficiency Standard<br/>
+            <i className="bar-median"></i>Median Wage<br/>
+            <i className="bar-annual"></i>Annual Income<br/>
             </div>
             <div className="chart"></div>
         </div>

@@ -1,7 +1,12 @@
 import React from "react";
+import jQuery from "jquery";
 
 let Discussion = React.createClass({
-
+  getInitialState: function() {
+    //An unfortunate work around due to a bug in nvd3 that causes a blank tooltip to exist...
+    jQuery(".nvtooltip").remove();
+    return null;
+  },
   render: function() {
     return (
       <div>

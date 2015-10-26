@@ -37,11 +37,10 @@ let FamilyLife = React.createClass({
 		return (
       <div>
       <div className="jumbotron">
-        <h1>Self-Sufficiency Breakdown for Households</h1>
+        <h1>How far does the Self-Sufficiency wage go?</h1>
         <hr/>
-        <p>Looking at our three households (single adult, single parent with two children, and
-            two parents with two children), this is how much the self-sufficiency study expects
-            to be spent on basic needs.</p>
+        <p>Looking at three household types (single adult, single parent with two children, and
+            two parents with two children), this is how much the self-sufficiency study allows for basic needs.</p>
         <form className="form-inline">
           <div className="form-group">
             <label>State/County:&nbsp;</label>

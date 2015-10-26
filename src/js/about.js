@@ -9,6 +9,14 @@ let About = React.createClass({
   render: function() {
     return (
       <div className="">
+      <h1>The Self-Sufficiency Standard</h1>
+      <p>With this project we wanted to see if and how a higher minimum wage would impact the life of someone working 
+        full-time at minimum wage. For that, we took at look at the the Self-Sufficiency Standard—a budget-based measure of 
+        the real cost of living and an alternative to the federal poverty measure. The Self-Sufficiency Standard determines the 
+        amount of income required for working families to meet basic needs at a minimally adequate level, taking into account 
+        family composition, ages of children, and geographic differences in costs. Self-Sufficiency is defined as how much 
+        income families of various sizes and compositions need to make ends meet — without public or private assistance.
+      <p>
       <table className="table table-bordered">
         <thead>
           <tr>

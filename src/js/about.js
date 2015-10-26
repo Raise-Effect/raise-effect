@@ -107,23 +107,23 @@ let About = React.createClass({
       </p>
       <h2>How the self-sufficiency standard has been used</h2>
       <h4>In Local Media</h4>
-      <p>
-        <div><a href="http://www.oregonlive.com/portland/index.ssf/2014/06/poverty_in_multnomah_county_a.html">Poverty in Multnomah County: A third of residents can't meet basic needs</a></div>
-        <div><a href="http://portlandtribune.com/pt/9-news/275943-151401-kotek-cites-groups-figures-in-pegging-minimum-wage">Kotek cites group's figures in pegging minimum wage</a></div>
-    </p>
+      <ul>
+        <li><a href="http://www.oregonlive.com/portland/index.ssf/2014/06/poverty_in_multnomah_county_a.html">Poverty in Multnomah County: A third of residents can't meet basic needs</a></li>
+        <li><a href="http://portlandtribune.com/pt/9-news/275943-151401-kotek-cites-groups-figures-in-pegging-minimum-wage">Kotek cites group's figures in pegging minimum wage</a></li>
+        </ul>
     <h4>By Local Agencies and Organizations</h4>
-    <p>
-        <div><a href="https://www2.prosperityplanner.org/">The Prosperity Planner for Oregon Residents</a></div>
-        <div><a href="http://www.northwesthealth.org/news/archive/2015/10/20/oregon-minimum-wage-boiled-down">Oregon Minimum Wage, Boiled Down</a></div>
-        <div><a href="http://www.worksystems.org/self-sufficiency">Regional Analysis of Self-Sufficiency Completed</a></div>
-        <div><a href="http://portlandpulse.org/node/352/taxonomy/term/92/">The Self-Sufficiency Standard Indicator by Greater Portland Pulse</a></div>
-        <div><a href="http://mkn.research.pdx.edu/2010/01/self-sufficiency/">Where the Ends Don’t Meet: Measuring Poverty and Self-Sufficiency Among Oregon’s Families</a></div>
-    </p>
+    <ul>
+        <li><a href="https://www2.prosperityplanner.org/">The Prosperity Planner for Oregon Residents</a></li>
+        <li><a href="http://www.northwesthealth.org/news/archive/2015/10/20/oregon-minimum-wage-boiled-down">Oregon Minimum Wage, Boiled Down</a></li>
+        <li><a href="http://www.worksystems.org/self-sufficiency">Regional Analysis of Self-Sufficiency Completed</a></li>
+        <li><a href="http://portlandpulse.org/node/352/taxonomy/term/92/">The Self-Sufficiency Standard Indicator by Greater Portland Pulse</a></li>
+        <li><a href="http://mkn.research.pdx.edu/2010/01/self-sufficiency/">Where the Ends Don’t Meet: Measuring Poverty and Self-Sufficiency Among Oregon’s Families</a></li>
+    </ul>
     <h4>Elsewhere in the US</h4>
-    <p>
-        <div><a href="http://www.pbs.org/newshour/making-sense/how-much-is-enough/">How Much Do You Need to Survive: An Interactive Guide to the Living Wage</a></div>
-        <div><a href="http://storymaps.esri.com/stories/2015/living-wage-map/">The Living Wage Map</a></div>
-    </p>
+    <ul>
+        <li><a href="http://www.pbs.org/newshour/making-sense/how-much-is-enough/">How Much Do You Need to Survive: An Interactive Guide to the Living Wage</a></li>
+        <li><a href="http://storymaps.esri.com/stories/2015/living-wage-map/">The Living Wage Map</a></li>
+    </ul>
     </div>
   );
   }

@@ -1,5 +1,35 @@
 let teamData = [
   {
+    "name": "Cat Nikolovski",
+    "title": "Producer",
+    "photoPath": "catnikolovski.jpeg"
+  },
+  {
+    "name": "Heather Ohana",
+    "title": "Facilitator and Data Scientist",
+    "photoPath": "heatherohana.jpeg"
+  },
+  {
+    "name": "Caterina Paun",
+    "title": "Product Design",
+    "photoPath": "caterinapaun.jpeg"
+  },
+  {
+    "name": "Hannah Fulop",
+    "title": "Visual Design and Branding",
+    "photoPath": "hannahfulop.jpeg"
+  },
+  {
+    "name": "Jaron Heard",
+    "title": "Software Engineer",
+    "photoPath": "jaronheard.jpeg"
+  },
+  {
+    "name": "Daniel West",
+    "title": "Software Engineer",
+    "photoPath": "danielwest.jpeg"
+  },
+  {
     "name": "Nick Bernard",
     "title": "Software Engineer",
     "photoPath": "nickbernard.jpeg"
@@ -10,9 +40,9 @@ let teamData = [
     "photoPath": "jasonbrown.jpeg"
   },
   {
-    "name": "Aaron DeVore",
+    "name": "Flora Worley",
     "title": "Software Engineer",
-    "photoPath": "aarondevore.jpeg"
+    "photoPath": "floraworley.jpeg"
   },
   {
     "name": "Gareth Ferneyhough",
@@ -20,44 +50,14 @@ let teamData = [
     "photoPath": "garethferneyhough.jpeg"
   },
   {
-    "name": "Hannah Fulop",
-    "title": "Designer",
-    "photoPath": "hannahfulop.jpeg"
-  },
-  {
-    "name": "Jaron Heard",
-    "title": "Software Engineer",
-    "photoPath": "jaronheard.jpeg"
-  },
-  {
-    "name": "Michael Kemery",
-    "title": "Data Scientist",
-    "photoPath": "michaelkemery.jpeg"
-  },
-  {
-    "name": "Michael Kim",
-    "title": "Data Scientist",
-    "photoPath": "michaelkim.jpeg"
-  },
-  {
-    "name": "Cat Nikolovski",
-    "title": "Executive Director Hack Oregon",
-    "photoPath": "catnikolovski.jpeg"
-  },
-  {
-    "name": "Heather Ohana",
-    "title": "Facilitator & Data Scientist",
-    "photoPath": "heatherohana.jpeg"
-  },
-  {
     "name": "Evan Palmer",
     "title": "Software Engineer",
     "photoPath": "evanpalmer.jpeg"
   },
   {
-    "name": "Caterina Paun",
-    "title": "UX Designer",
-    "photoPath": "caterinapaun.jpeg"
+    "name": "Aaron DeVore",
+    "title": "Software Engineer",
+    "photoPath": "aarondevore.jpeg"
   },
   {
     "name": "Mary Anne Thygesen",
@@ -65,15 +65,20 @@ let teamData = [
     "photoPath": "maryannetheygesen.jpeg"
   },
   {
-    "name": "Daniel West",
-    "title": "Software Engineer",
-    "photoPath": "danielwest.jpeg"
+    "name": "Michael Kemery",
+    "title": "Researcher, Modeler",
+    "photoPath": "michaelkemery.jpeg"
   },
   {
-    "name": "Flora Worley",
-    "title": "Software Engineer",
-    "photoPath": "floraworley.jpeg"
+    "name": "Michael Kim",
+    "title": "Researcher, Modeler",
+    "photoPath": "michaelkim.jpeg"
   },
+  {
+    "name": "Caitlin Baggot",
+    "title": "Content Advisor",
+    "photoPath": "caitlinbaggot.png"
+  }
 ]
 
 export default teamData;

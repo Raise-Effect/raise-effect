@@ -266,7 +266,7 @@ let HomePage = React.createClass({
 
         if (!annual) return 0;
         //TODO: Remove / totalWeight
-        return Math.round(annual.annual) * (weight && (weight.weight) || 1);
+        return Math.round(annual.annual) * (weight ? weight.weight : 1);
       }).sum())
 
       return a;
@@ -400,15 +400,6 @@ let HomePage = React.createClass({
                     <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? We’ve looked at three types of families in the state of Oregon
                       to see if the current minimum wage supports self-sufficiency.
                       (All data we used is from 2014.)</p>
-                    <div className="text-center">
-                      <p>Would you raise the minimum wage?</p>
-                    </div>
-                    <div id="slider">
-                        <SliderBox
-                          value={this.state.sliderWage}
-                          onChange={this.handleSliderWageChange}
-                        />
-                    </div>
                   </div>
                 </div>
 
@@ -416,12 +407,19 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
-                    <p></p>
-                  </div>
-                  <div className="col-md-6 component map">
-                    <h2>What’s the Regional Impact?</h2>
-                    <small>Understanding that some households will meet or exceed self-sufficiency at different rates,
-                    the color of the county relates to an average of all <Link to="/data">low income family types</Link> in a county. </small>
+                    <p>Would you raise the minimum wage? And what impact will that have on full-time
+                      minimum wage workers in the state of Oregon.</p>  
+
+                    <div id="slider">
+                        <SliderBox
+                          value={this.state.sliderWage}
+                          onChange={this.handleSliderWageChange}
+                        />
+                    </div>  
+          
+                    <div className="col-md-6 component map">
+                      <h2>What is the Impact in Oregon and Each County Within the State?</h2>
+            
                         <h3>
                             <div className="btn-group">
                               <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -439,21 +437,28 @@ let HomePage = React.createClass({
                         <div id="map">
                           <MapView selectedCounty={this.state.selectedCounty.fips} onMapSelect={this.selectCounty} sufficiency={this.getMapSufficiencyPercents()} />
                         </div>
-                    </div>
+                          <p className="data-hint"><u>Data Hint</u>: Understanding that some households will meet or exceed self-sufficiency 
+                            at different rates, the color of the county relates to an average of all 
+                            low income family types (link) in a county.</p>
+                      </div>                
 
-                    <div className="col-md-6 component households" id="households">
-                      <Households
-                        groups={this.state.groups}
-                        data={this.getSufficiencyPercents()}
-                      />
+                      <div className="col-md-6 component households" id="households">
+                        <Households
+                          groups={this.state.groups}
+                          data={this.getSufficiencyPercents()}
+                        />
+                      </div>
                     </div>
                 </div>
 
                 <div className="row">
                   <div className="jumbotron">
-                    <h1>What is the Impact of the Minimum Wage?</h1>
+                    <h1>Does this Wage Allow Households to Meet or Exceed Basic Benchmarks?</h1>
                     <hr/>
-                    <p></p>
+                    <p>When households with children meet benchmarks, single adult households are 
+                      exceeding benchmarks. This is a consistent phenomenon in the data across all regions,
+                      although the distribution of low income population across different household types
+                      will vary from region to region.</p>    
                   </div>
                 </div>
 

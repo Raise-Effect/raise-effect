@@ -37,16 +37,15 @@ let Households = React.createClass({
 	render() {
 		return (
       <div>
-        <h2>How Many Households are <Link to="/about">Self-Sufficient</Link> at this Wage?</h2>
-        <small>
-          Our data accounts for the fact that it costs different amounts of money to
-          support children at different ages.
-        </small>
+        <h2>How Many Households are <Link to="/about">Self-Sufficient</Link> at the Given Wage?</h2>
         <ProgressBar completed={this.props.data.geoPercent}/>
-        <p>{this.props.data.geoPercent}% of households in this region are low income households.</p>
+        <p className="data-hint">{this.props.data.geoPercent}% of households in this region are low income.</p>
         {
           this.getFamilyBreakdown()
         }
+        <p className="data-hint add-margin"><u>Data Hint</u>: our data accounts for the fact that it costs different amounts of money to 
+          support children of different ages.
+        </p>
       </div>
 		);
 	}

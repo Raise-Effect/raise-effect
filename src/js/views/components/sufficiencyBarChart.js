@@ -2,7 +2,7 @@ import React from "react";
 import {findDOMNode} from "react-dom";
 import _ from "lodash";
 import d3 from "d3";
-import nv from "nvd3";
+import {bulletChart as chamber} from "../charts/bulletChart";
 
 let SufficiencyBarChart = React.createClass({
   getDefaultProps: function() {
@@ -19,10 +19,10 @@ let SufficiencyBarChart = React.createClass({
     });
   },
 
-  getChartData: function() {
+  getChartData: function(updateData) {
     let data       = [],
-        incomeData = this.props.income,
-        wageData   = this.props.wageData;
+        incomeData = updateData ? updateData.income : this.props.income,
+        wageData   = updateData ? updateData.wageData : this.props.wageData;
 
     _.map(this.props.groups, (group) => {
       let groupData = {
@@ -49,8 +49,8 @@ let SufficiencyBarChart = React.createClass({
     return data;
   },
 
-  refreshChart: function() {
-    var chartData = this.getChartData();
+  refreshChart: function(data) {
+    var chartData = this.getChartData(data);
 
     d3.select(".chart").selectAll("svg")
       .data(chartData)
@@ -60,21 +60,29 @@ let SufficiencyBarChart = React.createClass({
   },
 
   renderChart: function() {
-    var bulletChart = nv.models.bulletChart().color(["#1c8677"]),
+    var bulletChart = chamber().color(["#1c8677"]),
         chartData   = this.getChartData();
-
     bulletChart.margin({"top": 0, "bottom": 0, "left": 200});
+    bulletChart.ticks(10);
+    bulletChart.tickFormat(function(d) {
+      var parts = d.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return '$' + parts.join(".");
+    });
 
     var chart = d3.select(".chart").selectAll("svg")
       .data(chartData)
       .enter().append("svg")
       .attr("class", "bullet nvd3")
       .attr("preserveAspectRatio","xMinYMin meet")
-      .attr("viewBox", "0 0 1140 112")
+      .attr("viewBox", "0 0 1140 60")
       .attr("width","100%")
       .attr("height", "8em")
       .transition().duration(1000)
       .call(bulletChart);
+
+      //Let's pretend the following line didn't happen... okay?
+      d3.select(".chart").selectAll("svg")[0][2].setAttribute("viewBox", "0 0 1140 80");
 
       d3.selectAll(".nv-markerTriangle").remove();
 
@@ -82,9 +90,16 @@ let SufficiencyBarChart = React.createClass({
   },
 
   render: function() {
+
     return (
       <div className="row">
         <div className="col-xs-12">
+            <div className="info legend bar-legend">
+            <i className="bar-poverty"></i>Poverty<br/>
+            <i className="bar-sss"></i>Self-Sufficiency<br/>
+            <i className="bar-median"></i>Median<br/>
+            <i className="bar-annual"></i>Annual Salary<br/>
+            </div>
             <div className="chart"></div>
         </div>
      </div>
@@ -95,8 +110,8 @@ let SufficiencyBarChart = React.createClass({
     this.renderChart();
   },
 
-  componentWillUpdate: function() {
-    this.refreshChart();
+  componentWillUpdate: function(data) {
+    this.refreshChart(data);
   }
 });
 

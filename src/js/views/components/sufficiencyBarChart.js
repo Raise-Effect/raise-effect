@@ -60,8 +60,10 @@ let SufficiencyBarChart = React.createClass({
   },
 
   renderChart: function() {
-    var bulletChart = nv.models.bulletChart(),
+    var bulletChart = nv.models.bulletChart().color(["#1c8677"]),
         chartData   = this.getChartData();
+
+    bulletChart.margin({"top": 0, "bottom": 0, "left": 200});
 
     var chart = d3.select(".chart").selectAll("svg")
       .data(chartData)
@@ -71,14 +73,13 @@ let SufficiencyBarChart = React.createClass({
       .call(bulletChart);
 
     d3.selectAll(".nv-markerTriangle").remove();
-    d3.selectAll(".nv-titles").remove();
 
     this.chartType = bulletChart;
   },
 
   render: function() {
     return (
-      <div className="row horizontal rounded">
+      <div className="row">
         <div className="col-xs-12">
             <div className="chart"></div>
         </div>

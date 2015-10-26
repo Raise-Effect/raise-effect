@@ -86,8 +86,14 @@ export function bulletChart() {
             var title = gEnter.select('.nv-titles').append('g')
                 .attr('text-anchor', 'end')
                 .attr('transform', 'translate(-6,' + (height - margin.top - margin.bottom + 8) / 2 + ')');
-            title.append('text')
-                .attr('class', 'nv-title')
+
+            title.append('image')
+                .attr('height', "48px")
+                .attr("width", "48px")
+                .attr("x","-70")
+                .attr("y","-28")
+                .attr('xlink:href', d.img)
+
                 .text(function(d) { return d.title; });
 
             title.append('text')

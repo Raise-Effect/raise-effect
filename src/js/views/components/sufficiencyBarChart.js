@@ -27,6 +27,7 @@ let SufficiencyBarChart = React.createClass({
     _.map(this.props.groups, (group) => {
       let groupData = {
         "title": group.name,
+        "img": group.name === "Single Adult" ? "/public/images/family-single-adult.png": group.name === "One Adult Two Children" ? "/public/images/family-one-parent.png" : "/public/images/family-two-parent.png",
         "measures": [incomeData[group.populationKey]],
         "measureLabels": ["Annual Income"],
         "ranges": [
@@ -62,7 +63,7 @@ let SufficiencyBarChart = React.createClass({
   renderChart: function() {
     var bulletChart = chamber().color(["#1c8677"]),
         chartData   = this.getChartData();
-    bulletChart.margin({"top": 0, "bottom": 0, "left": 225});
+    bulletChart.margin({"top": 0, "bottom": 0, "left": 150});
     bulletChart.ticks(10);
     bulletChart.tickFormat(function(d) {
       var parts = d.toString().split(".");

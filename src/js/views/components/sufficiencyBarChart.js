@@ -40,7 +40,7 @@ let SufficiencyBarChart = React.createClass({
           // "Median Household Income",
           "Median Income",
           "Self-Sufficiency Wage",
-          "Poverty Line"
+          "Federal Poverty Line"
         ]
       };
 

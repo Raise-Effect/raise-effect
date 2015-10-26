@@ -62,7 +62,7 @@ let SufficiencyBarChart = React.createClass({
   renderChart: function() {
     var bulletChart = chamber().color(["#1c8677"]),
         chartData   = this.getChartData();
-    bulletChart.margin({"top": 0, "bottom": 0, "left": 200});
+    bulletChart.margin({"top": 0, "bottom": 0, "left": 215});
     bulletChart.ticks(10);
     bulletChart.tickFormat(function(d) {
       var parts = d.toString().split(".");

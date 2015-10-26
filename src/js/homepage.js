@@ -395,9 +395,7 @@ let HomePage = React.createClass({
             <div className="col-xs-12">
                 <div className="row">
                   <div className="jumbotron">
-                    <h1>The Oregon Minimum Wage</h1>
-                    <hr/>
-                    <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? Here are some visualizations to help understand how the quality of life may be affected by a minimum wage increase for different household types in different counties across Oregon.</p>
+                    <p>The Oregon minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? Here are some visualizations to help understand how the quality of life may be affected by a minimum wage increase for different household types in different counties across Oregon.</p>
                   </div>
                 </div>
 
@@ -417,7 +415,7 @@ let HomePage = React.createClass({
                     <div className="col-md-6 component map">
                       <h2>What is the Impact in Oregon and Each County Within the State?</h2>
 
-                        
+
                         <form className="form-inline">
                           <div className="form-group">
                             <label>State/County:&nbsp;</label>

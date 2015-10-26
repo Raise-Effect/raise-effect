@@ -403,7 +403,7 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
-                    <p>Does raising the minimum wage affect all low-income households equally? How do location and family composition chnage the impact of a minimum wage increase?</p>
+                    <p>Does raising the minimum wage affect all low-income households equally? How do location and family composition change the impact of a minimum wage increase? What would you do?</p>
 
                     <div className="slider-container">
                         <SliderBox

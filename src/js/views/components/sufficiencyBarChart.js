@@ -6,7 +6,7 @@ import nv from "nvd3";
 
 let SufficiencyBarChart = React.createClass({
   getDefaultProps: function() {
-    return { income: {}, groups: [] };
+    return { income: {}, groups: [], wageData: {} };
   },
 
   getHeaders: function() {
@@ -20,16 +20,27 @@ let SufficiencyBarChart = React.createClass({
   },
 
   getChartData: function() {
-    let data   = [],
-        income = this.props.income;
+    let data       = [],
+        incomeData = this.props.income,
+        wageData   = this.props.wageData;
 
     _.map(this.props.groups, (group) => {
       let groupData = {
         "title": group.name,
-        "measures": [income[group.populationKey]],
-        "measureLabels": ['Annual Income'],
-        "ranges":[10000, 25000, 50000],
-        "rangeLabels":['Federal Poverty Line', 'Federal Poverty Line', 'Federal Poverty Line']
+        "measures": [incomeData[group.populationKey]],
+        "measureLabels": ["Annual Income"],
+        "ranges": [
+          wageData[group.populationKey].povertyLine,
+          wageData[group.populationKey].sufficiencyWage,
+          wageData[group.populationKey].medianIncome,
+          wageData[group.populationKey].householdMedianIncome
+        ],
+        "rangeLabels": [
+          "Poverty Line",
+          "Self-Sufficiency Wage",
+          "Median Income",
+          "Median Household Income"
+        ]
       };
 
       data.push(groupData);
@@ -54,8 +65,8 @@ let SufficiencyBarChart = React.createClass({
 
     var chart = d3.select(".chart").selectAll("svg")
       .data(chartData)
-      .enter().append('svg')
-      .attr('class',"bullet nvd3")
+      .enter().append("svg")
+      .attr("class", "bullet nvd3")
       .transition().duration(1000)
       .call(bulletChart);
 

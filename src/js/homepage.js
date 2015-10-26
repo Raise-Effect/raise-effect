@@ -299,7 +299,8 @@ let HomePage = React.createClass({
       return {
         singleAdult: this.state.wageStats[fips][0].nonFamilyMedianIncome,
         singleParent: this.state.wageStats[fips][0].familyMedianIncome,
-        marriedFamily: this.state.wageStats[fips][0].marriedMedianIncome
+        marriedFamily: this.state.wageStats[fips][0].marriedMedianIncome,
+        household: this.state.wageStats[fips][0].householdMedianIncome
       }
     },
 
@@ -307,21 +308,24 @@ let HomePage = React.createClass({
       var sufficiencyWageData = this.getAnnualSufficiencyWage(),
           medianIncomeData    = this.getMedianIncome();
 
-      var data = {
+      return {
         singleAdult: {
           povertyLine: 11490,
           sufficiencyWage: sufficiencyWageData.singleAdult,
-          medianIncome: medianIncomeData.singleAdult
+          medianIncome: medianIncomeData.singleAdult,
+          householdMedianIncome: medianIncomeData.household
         },
         singleParent: {
           povertyLine: 19530,
           sufficiencyWage: sufficiencyWageData.singleParent,
-          medianIncome: medianIncomeData.singleParent
+          medianIncome: medianIncomeData.singleParent,
+          householdMedianIncome: medianIncomeData.household
         },
         marriedFamily: {
           povertyLine: 23550,
           sufficiencyWage: sufficiencyWageData.marriedFamily,
-          medianIncome: medianIncomeData.marriedFamily
+          medianIncome: medianIncomeData.marriedFamily,
+          householdMedianIncome: medianIncomeData.household
         }
       }
     },

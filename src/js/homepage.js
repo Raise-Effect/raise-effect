@@ -397,9 +397,7 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>The Oregon Minimum Wage</h1>
                     <hr/>
-                    <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? We’ve looked at three types of families in the state of Oregon
-                      to see if the current minimum wage supports self-sufficiency.
-                      (All data we used is from 2014.)</p>
+                    <p>The minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? Here are some visualizations to help understand how the quality of life may be affected by a minimum wage increase for different household types in different counties across Oregon.</p>
                   </div>
                 </div>
 
@@ -407,8 +405,7 @@ let HomePage = React.createClass({
                   <div className="jumbotron">
                     <h1>What is the Impact of the Minimum Wage?</h1>
                     <hr/>
-                    <p>Would you raise the minimum wage? And what impact will that have on full-time
-                      minimum wage workers in the state of Oregon.</p>
+                    <p>Does raising the minimum wage affect all low-income households equally? How do location and family composition chnage the impact of a minimum wage increase?</p>
 
                     <div className="slider-container">
                         <SliderBox
@@ -445,7 +442,7 @@ let HomePage = React.createClass({
                         </div>
                           <p className="data-hint"><u>Data Hint</u>: Understanding that some households will meet or exceed self-sufficiency
                             at different rates, the color of the county relates to an average of all
-                            low income family types (link) in a county.</p>
+                            low income family types in a county.</p>
                       </div>
 
                       <div className="col-md-6 component households" id="households">

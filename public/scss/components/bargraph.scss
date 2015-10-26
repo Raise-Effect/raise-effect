@@ -41,3 +41,30 @@ svg.nvd3 text {
   border-radius: 3px;
   box-shadow: inset 0 0 5px rgba(0,0,0,.2);
 }
+
+.nvd3 text.nv-title {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 1.25em;
+}
+
+.bar-median {
+  background-color: #c6c6c6;
+}
+.bar-poverty {
+  background-color:#636363;
+}
+.bar-sss {
+  background-color: #9e9e9e;
+}
+.bar-annual {
+  background-color: $sufficient;
+}
+.bar-legend {
+    position: absolute;
+    top:0;
+    right:25px;
+    width: 140px;
+}

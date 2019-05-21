@@ -395,6 +395,7 @@ let HomePage = React.createClass({
             <div className="col-xs-12">
                 <div className="row">
                   <div className="jumbotron">
+                    <p><em>This project was last updated in October 2015, prior to the Oregon Legislature's passage of <Link to="https://perma.cc/5QLX-4FG7">a new minimum wage law</Link>.</em></p>          
                     <p>The Oregon minimum wage is <Link to="/discussion">$9.25</Link>. Is that enough? Here are some visualizations to help understand how the quality of life may be affected by a minimum wage increase for different household types in different counties across Oregon.</p>
                   </div>
                 </div>
